@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skyline Velo Cycling Club — SF Peninsula Junior Cycling</title>
+<meta name="description" content="A junior (18 & under) cycling club on the SF Peninsula. Group rides, segment rivalries, open recruitment, free to join.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="brand"><a href="index.html">Skyline Velo<span class="dot">.</span>CC</a></div>
+  <div class="links">
+    <a href="join.html">Join</a>
+    <a href="waiver.html">Waiver</a>
+  </div>
+</nav>
+
+<!-- JERSEY SEQUENCE: front (hero) -> rotate to back (origin) -> pocket 1 (rides) -> pocket 2 (join) -> pocket 3 (leaderboard) -->
+<!-- Real 3D model (assets/jersey.glb), rendered with Three.js, rotation/framing tied to scroll. -->
+<!-- Text overlays sit ON TOP of the jersey (not baked into the 3D texture) — see js/jersey-3d.js. -->
+<section class="jersey-pin" id="jerseyPin">
+
+  <canvas id="jerseyCanvas"></canvas>
+  <div class="jersey-loading" id="jerseyLoading">Loading…</div>
+
+  <div class="jersey-overlay front-overlay">
+    <div class="hero-eyebrow">SF Peninsula &middot; 18 &amp; Under &middot; Free</div>
+    <h1 class="hero-title">
+      <span class="line">SKYLINE VELO</span>
+      <span class="line accent">CYCLING CLUB</span>
+    </h1>
+    <div class="scroll-cue">Scroll ↓</div>
+  </div>
+
+  <div class="jersey-overlay jersey-panel" id="panelBack">
+    <div class="eyebrow">The Origin</div>
+    <h2>It started on Old La Honda.</h2>
+    <p class="lede">Before there was a club, there was a group chat ranking each other on local Strava segments — Old La Honda in Woodside, and every other climb worth bragging rights. Skyline Velo Cycling Club turns that rivalry into something real.</p>
+  </div>
+
+  <div class="jersey-overlay jersey-panel" id="panel1">
+    <div class="eyebrow">Pocket One &middot; The Schedule</div>
+    <h2>Two rides a week, built around school.</h2>
+    <p class="lede">Wednesday evenings (the anchor ride) and Saturday long rides. Meeting points and exact times are still being finalized — check Instagram before you head out.</p>
+  </div>
+
+  <div class="jersey-overlay jersey-panel" id="panel2">
+    <div class="eyebrow">Pocket Two &middot; Join</div>
+    <h2>18 and under. Any ability. Free.</h2>
+    <p class="lede">No dues, no tryout. Message us, get a parent or guardian to sign the waiver, show up ready to ride.</p>
+    <a class="btn" href="join.html" style="pointer-events: auto;">Join the Club</a>
+  </div>
+
+  <div class="jersey-overlay jersey-panel" id="panel3">
+    <div class="eyebrow">Pocket Three &middot; The Leaderboard</div>
+    <h2>Segment hunting is the whole point.</h2>
+    <p class="lede">Old La Honda and the rest of the Peninsula's classic climbs, tracked on a shared club leaderboard. KOMs and QOMs get bragging rights.</p>
+    <!-- TODO: replace with the real club Strava link once MA cycling club is rebranded -->
+    <a class="btn ghost" href="#" style="pointer-events: auto;">Follow on Strava</a>
+  </div>
+
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <div class="brand">Skyline Velo Cycling Club</div>
+      <div class="meta">Menlo Park &amp; the SF Peninsula &middot; Founded 2026</div>
+    </div>
+    <div class="socials">
+      <!-- TODO: replace both with real links once the club accounts exist -->
+      <a href="#">Instagram</a>
+      <a href="#">Strava</a>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="meta" style="margin-top: 16px;">3D jersey model by <a href="https://sketchfab.com/sevclothing" target="_blank" rel="noopener">Sev</a>, via <a href="https://sketchfab.com/3d-models/cycling-jersey-a92dcbd8c126486eb22b008b8f4a8b27" target="_blank" rel="noopener">Sketchfab</a> (CC Attribution).</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module" src="js/jersey-3d.js"></script>
+</body>
+</html>
