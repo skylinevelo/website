@@ -9,6 +9,69 @@
 </head>
 <body>
 
+<!-- ============================================================ -->
+<!-- TEMPORARY: under-construction overlay. Self-contained on      -->
+<!-- purpose (markup + styles + dismiss logic all in this one      -->
+<!-- block) — to remove later, just delete everything between      -->
+<!-- these two comment markers, nothing else to clean up elsewhere. -->
+<div id="constructionOverlay">
+  <style>
+    #constructionOverlay {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    #constructionOverlay .tape-band {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 150vmax;
+      height: 64px;
+      margin-top: -32px;
+      margin-left: -75vmax;
+      background: repeating-linear-gradient(
+        45deg,
+        #c0392b, #c0392b 40px,
+        #1a1a1a 40px, #1a1a1a 80px
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 24px rgba(0,0,0,0.4);
+    }
+    #constructionOverlay .tape-band.a { transform: rotate(20deg); }
+    #constructionOverlay .tape-band.b { transform: rotate(-20deg); }
+    #constructionOverlay .tape-band span {
+      color: #fff;
+      font-family: 'Anton', 'Inter', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+      white-space: nowrap;
+    }
+    #constructionOverlay .dismiss {
+      position: absolute;
+      top: 20px; right: 20px;
+      z-index: 1000;
+      pointer-events: auto;
+      background: #1a1a1a;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 36px; height: 36px;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+  </style>
+  <div class="tape-band a"><span>&#9888; Under Construction &middot; Under Construction &middot; Under Construction &#9888;</span></div>
+  <div class="tape-band b"><span>&#9888; Under Construction &middot; Under Construction &middot; Under Construction &#9888;</span></div>
+  <button class="dismiss" onclick="document.getElementById('constructionOverlay').remove()" aria-label="Dismiss">&times;</button>
+</div>
+<!-- END TEMPORARY under-construction overlay -->
+<!-- ============================================================ -->
+
 <nav class="site-nav">
   <div class="brand"><a href="index.html">Skyline Velo<span class="dot">.</span>CC</a></div>
   <div class="links">
@@ -17,50 +80,116 @@
   </div>
 </nav>
 
-<!-- JERSEY SEQUENCE: front (hero) -> rotate to back (origin) -> pocket 1 (rides) -> pocket 2 (join) -> pocket 3 (leaderboard) -->
-<!-- Real 3D model (assets/jersey.glb), rendered with Three.js, rotation/framing tied to scroll. -->
-<!-- Text overlays sit ON TOP of the jersey (not baked into the 3D texture) — see js/jersey-3d.js. -->
-<section class="jersey-pin" id="jerseyPin">
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">SF Peninsula &middot; 18 &amp; Under &middot; Free</div>
+  <h1 class="hero-title">
+    <span class="line">SKYLINE VELO</span>
+    <span class="line accent">CYCLING CLUB</span>
+  </h1>
+  <p class="hero-sub">A junior cycling club built around the Bay Area's toughest local climbs — group rides, segment rivalries, and open recruitment.</p>
+  <div class="scroll-cue">Scroll ↓</div>
+</section>
 
-  <canvas id="jerseyCanvas"></canvas>
-  <div class="jersey-loading" id="jerseyLoading">Loading…</div>
-
-  <div class="jersey-overlay front-overlay">
-    <div class="hero-eyebrow">SF Peninsula &middot; 18 &amp; Under &middot; Free</div>
-    <h1 class="hero-title">
-      <span class="line">SKYLINE VELO</span>
-      <span class="line accent">CYCLING CLUB</span>
-    </h1>
-    <div class="scroll-cue">Scroll ↓</div>
-  </div>
-
-  <div class="jersey-overlay jersey-panel" id="panelBack">
+<!-- ORIGIN -->
+<section class="section reveal">
+  <div class="wrap-inner">
     <div class="eyebrow">The Origin</div>
     <h2>It started on Old La Honda.</h2>
-    <p class="lede">Before there was a club, there was a group chat ranking each other on local Strava segments — Old La Honda in Woodside, and every other climb worth bragging rights. Skyline Velo Cycling Club turns that rivalry into something real.</p>
+    <p class="lede">Before there was a club, there was a group chat ranking each other on local Strava segments — Old La Honda in Woodside, and every other climb worth bragging rights. Skyline Velo Cycling Club turns that rivalry into something real: organized rides, a shared leaderboard, and a club that's open to any rider 18 and under.</p>
   </div>
+</section>
 
-  <div class="jersey-overlay jersey-panel" id="panel1">
-    <div class="eyebrow">Pocket One &middot; The Schedule</div>
+<!-- HORIZONTAL-SCROLL GALLERY -->
+<!-- Pins the section while the track slides sideways as you scroll down. Placeholder cards until real
+     club/ride photos exist (website/setup.md) — swap for <img> tags, the scroll mechanic stays the same. -->
+<section class="gallery-pin" id="galleryPin">
+  <div class="gallery-heading">
+    <div class="eyebrow">On The Road</div>
+  </div>
+  <div class="gallery-track" id="galleryTrack">
+    <div class="gallery-card"><div class="label">Photo coming soon<br>Old La Honda climb</div></div>
+    <div class="gallery-card"><div class="label">Photo coming soon<br>Saturday long ride</div></div>
+    <div class="gallery-card"><div class="label">Photo coming soon<br>Wednesday evening ride</div></div>
+    <div class="gallery-card"><div class="label">Photo coming soon<br>The group at Skyline Blvd</div></div>
+    <div class="gallery-card"><div class="label">Photo coming soon<br>Segment leaderboard night</div></div>
+  </div>
+</section>
+
+<!-- RIDES -->
+<section class="section reveal">
+  <div class="wrap-inner">
+    <div class="eyebrow">The Schedule</div>
     <h2>Two rides a week, built around school.</h2>
-    <p class="lede">Wednesday evenings (the anchor ride) and Saturday long rides. Meeting points and exact times are still being finalized — check Instagram before you head out.</p>
+    <p class="lede">A short weekday ride and a longer weekend one — designed to actually fit a school schedule, not fight it.</p>
+    <div class="rides-list">
+      <div class="ride-row">
+        <div>
+          <div class="day">Wednesday</div>
+          <div class="detail">Evening &middot; short &middot; meeting point TBA</div>
+        </div>
+        <div class="tag">Anchor Ride</div>
+      </div>
+      <div class="ride-row">
+        <div>
+          <div class="day">Saturday</div>
+          <div class="detail">Long ride &middot; meeting point TBA</div>
+        </div>
+        <div class="tag">Long Ride</div>
+      </div>
+    </div>
+    <p class="lede" style="margin-top: 24px; font-size: 0.95rem; max-width: 620px;">Exact meeting times and points are still being finalized — check Instagram for the latest before showing up.</p>
   </div>
+</section>
 
-  <div class="jersey-overlay jersey-panel" id="panel2">
-    <div class="eyebrow">Pocket Two &middot; Join</div>
-    <h2>18 and under. Any ability. Free.</h2>
-    <p class="lede">No dues, no tryout. Message us, get a parent or guardian to sign the waiver, show up ready to ride.</p>
-    <a class="btn" href="join.html" style="pointer-events: auto;">Join the Club</a>
+<!-- LEADERSHIP -->
+<section class="section reveal" style="background: var(--bg-raised);">
+  <div class="wrap-inner">
+    <div class="eyebrow">Leadership</div>
+    <h2>Run by the riders who show up.</h2>
+    <p class="lede">Real roles, real responsibility — not decorative titles.</p>
+    <div class="leadership-grid">
+      <div class="leader-card">
+        <div class="leader-avatar">GH</div>
+        <div class="leader-name">Gabriel Hsieh</div>
+        <div class="leader-role">President &middot; Senior</div>
+      </div>
+      <div class="leader-card">
+        <div class="leader-avatar">RN</div>
+        <div class="leader-name">Ray Nonnenberg</div>
+        <div class="leader-role">Founder &amp; Vice President &middot; Junior</div>
+      </div>
+      <div class="leader-card">
+        <div class="leader-avatar">JB</div>
+        <div class="leader-name">Jack Bekaert</div>
+        <div class="leader-role">Treasurer &middot; Sophomore</div>
+      </div>
+      <div class="leader-card">
+        <div class="leader-avatar">NO</div>
+        <div class="leader-name">Nathan Otte</div>
+        <div class="leader-role">Social Media &middot; Freshman</div>
+      </div>
+    </div>
+    <!-- Member count: real number, checked live via the Strava connector on 2026-09-01 — update by
+         hand when it changes meaningfully; no live backend on a static site to pull this automatically. -->
+    <div class="member-count">
+      <div class="num">4</div>
+      <div class="label">Current Members</div>
+    </div>
   </div>
+</section>
 
-  <div class="jersey-overlay jersey-panel" id="panel3">
-    <div class="eyebrow">Pocket Three &middot; The Leaderboard</div>
-    <h2>Segment hunting is the whole point.</h2>
-    <p class="lede">Old La Honda and the rest of the Peninsula's classic climbs, tracked on a shared club leaderboard. KOMs and QOMs get bragging rights.</p>
-    <!-- TODO: replace with the real club Strava link once MA cycling club is rebranded -->
-    <a class="btn ghost" href="#" style="pointer-events: auto;">Follow on Strava</a>
+<!-- JOIN -->
+<section class="join-section reveal">
+  <div class="wrap-inner">
+    <div class="eyebrow">No Cost. No Catch.</div>
+    <h2>Open recruitment. Every rider welcome.</h2>
+    <p class="lede">18 and under, any ability level, completely free — no membership fee, no dues. As the club grows, custom kits, local sponsorships, and a real racing division are all things we're building toward — not promises, just where this could go.</p>
+    <div class="btn-row">
+      <a class="btn" href="join.html">Join the Club</a>
+      <a class="btn ghost" href="waiver.html">Read the Waiver</a>
+    </div>
   </div>
-
 </section>
 
 <footer class="site-footer">
@@ -70,26 +199,15 @@
       <div class="meta">Menlo Park &amp; the SF Peninsula &middot; Founded 2026</div>
     </div>
     <div class="socials">
-      <!-- TODO: replace both with real links once the club accounts exist -->
+      <!-- TODO: replace both with real links once the Instagram account exists (see website/setup.md) -->
       <a href="#">Instagram</a>
-      <a href="#">Strava</a>
+      <a href="https://www.strava.com/clubs/2241027" target="_blank" rel="noopener">Strava</a>
     </div>
-  </div>
-  <div class="wrap">
-    <div class="meta" style="margin-top: 16px;">3D jersey model by <a href="https://sketchfab.com/sevclothing" target="_blank" rel="noopener">Sev</a>, via <a href="https://sketchfab.com/3d-models/cycling-jersey-a92dcbd8c126486eb22b008b8f4a8b27" target="_blank" rel="noopener">Sketchfab</a> (CC Attribution).</div>
   </div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-  }
-}
-</script>
-<script type="module" src="js/jersey-3d.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

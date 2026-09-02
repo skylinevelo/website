@@ -1,2 +1,8 @@
 setup.md
 .DS_Store
+
+# Retired 2026-09-01 with the 3D jersey concept (see decisions-log.md) — kept locally in case it's
+# revisited (e.g. an interactive kit preview), but not worth 13.7MB in a public repo unused.
+assets/jersey.glb
+scripts/recolor_jersey.py
+js/jersey-3d.js
