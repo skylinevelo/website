@@ -37,6 +37,22 @@ document.querySelectorAll('.reveal').forEach((el) => {
   });
 });
 
+// Mobile nav toggle — hamburger opens a slide-in panel, closes on link tap or a second toggle.
+const navToggle = document.querySelector('#navToggle');
+const navLinks = document.querySelector('#navLinks');
+if (navToggle && navLinks) {
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.innerHTML = isOpen ? '&times;' : '&#9776;';
+  });
+  navLinks.querySelectorAll('a').forEach((a) => {
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.innerHTML = '&#9776;';
+    });
+  });
+}
+
 // Nav goes solid once you've scrolled past the top of the page, so links stay readable over
 // whatever section is underneath instead of just the hero. Plain scroll listener, not
 // ScrollTrigger — this is a simple on/off toggle, doesn't need pinning or scrubbing.
