@@ -37,6 +37,16 @@ document.querySelectorAll('.reveal').forEach((el) => {
   });
 });
 
+// Nav goes solid once you've scrolled past the top of the page, so links stay readable over
+// whatever section is underneath instead of just the hero. Plain scroll listener, not
+// ScrollTrigger — this is a simple on/off toggle, doesn't need pinning or scrubbing.
+const siteNav = document.querySelector('#siteNav');
+if (siteNav) {
+  window.addEventListener('scroll', () => {
+    siteNav.classList.toggle('scrolled', window.scrollY > 80);
+  });
+}
+
 // Horizontal-scroll gallery: pins the section while the track slides sideways as the page scrolls
 // down. Recalculates on resize since card widths are viewport-relative (min(70vw, 420px)).
 function buildGalleryScroll() {
