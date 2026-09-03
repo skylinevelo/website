@@ -316,32 +316,29 @@ footer.site-footer .watermark {
 }
 .scene-track svg { display: block; width: 100%; height: 100%; }
 
-/* Crest-flip transition overlay — see the HTML comment above #crestFlip for what this does. */
+/* Crest-flip transition — a FULL-VIEWPORT takeover, not a card. Lives outside #scenePin in the
+   DOM (fixed positioning + high z-index, sibling of nav/announce-bar) specifically so GSAP's pin
+   wrapper (which applies its own transform to #scenePin) can never trap or reorder its stacking —
+   it needs to cover the entire page, nav and announce-bar included, while it plays. See the HTML
+   comment above #crestFlip for the sequence. */
 .crest-flip {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  perspective: 1600px;
+  z-index: 500;
+  perspective: 2200px;
   opacity: 0;
   pointer-events: none;
 }
 .crest-flip-inner {
-  position: relative;
-  width: min(64vw, 440px);
-  aspect-ratio: 1;
+  position: absolute;
+  inset: 0;
   transform-style: preserve-3d;
-  border-radius: 14px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  transform-origin: 50% 17%;
 }
 .crest-face {
   position: absolute;
   inset: 0;
   backface-visibility: hidden;
-  border-radius: 14px;
-  overflow: hidden;
 }
 .crest-face svg { display: block; width: 100%; height: 100%; }
 .crest-face.crest-front { transform: rotateY(0deg); }

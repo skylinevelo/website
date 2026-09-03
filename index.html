@@ -94,6 +94,66 @@
   <button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
 </nav>
 
+<!-- Crest-flip transition: a FULL-VIEWPORT takeover (not a card), lives at body level — fixed
+     positioning + z-index 500 so it sits above nav/announce-bar too, and can never get trapped by
+     the transform GSAP applies to #scenePin for pinning (see the note in css/style.css above
+     .crest-flip). Plays only during the La Honda -> West Alpine scroll segment: a marker climbs
+     the front face's hairpin road stub, the whole screen zooms toward the crest, then flips 180deg
+     (rotationY) to its back face — cresting the ridge and landing on the other side. The real
+     .scene-track snaps to the West Alpine position while this is fully opaque, so the jump under
+     it is never visible. See buildSceneScroll() in js/main.js. -->
+<div class="crest-flip" id="crestFlip">
+  <div class="crest-flip-inner" id="crestFlipInner">
+    <div class="crest-face crest-front">
+      <svg viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="crestSkyFront" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#3f7d9c" /><stop offset="100%" stop-color="#8fc3de" />
+          </linearGradient>
+        </defs>
+        <rect width="1440" height="900" fill="#123B2A" />
+        <rect x="0" y="0" width="1440" height="220" fill="url(#crestSkyFront)" />
+        <polygon fill="#4C7A63" opacity="0.6" points="0,220 0,170 220,140 460,175 700,120 940,170 1180,135 1440,165 1440,220" />
+        <polygon fill="#0D2E20" points="0,900 0,300 180,240 340,290 500,210 660,270 820,190 980,260 1140,200 1300,270 1440,220 1440,900" />
+        <g opacity="0.95">
+          <ellipse cx="120" cy="360" rx="34" ry="32" fill="#0D2E20" /><ellipse cx="104" cy="338" rx="20" ry="19" fill="#1B4A34" />
+          <ellipse cx="1320" cy="380" rx="32" ry="30" fill="#123B2A" /><ellipse cx="1320" cy="358" rx="18" ry="21" fill="#1B4A34" />
+          <ellipse cx="70" cy="520" rx="36" ry="34" fill="#123B2A" /><ellipse cx="52" cy="498" rx="21" ry="20" fill="#1B4A34" />
+          <ellipse cx="1370" cy="540" rx="34" ry="32" fill="#0D2E20" /><ellipse cx="1370" cy="518" rx="19" ry="22" fill="#1B4A34" />
+          <ellipse cx="150" cy="700" rx="38" ry="36" fill="#0D2E20" /><ellipse cx="132" cy="676" rx="22" ry="21" fill="#1B4A34" />
+          <ellipse cx="1290" cy="720" rx="36" ry="34" fill="#123B2A" /><ellipse cx="1290" cy="696" rx="20" ry="23" fill="#1B4A34" />
+        </g>
+        <!-- hairpin road stub climbing to the crest — an S, not an L -->
+        <path id="crestRoadFront" d="M 720,900 Q 420,760 700,680 Q 980,600 680,500 Q 380,400 700,300 Q 1000,220 720,150" fill="none" stroke="#A79C86" stroke-width="46" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M 720,900 Q 420,760 700,680 Q 980,600 680,500 Q 380,400 700,300 Q 1000,220 720,150" fill="none" stroke="#F3EBDD" stroke-width="5" stroke-dasharray="4 20" stroke-linecap="round" />
+        <circle id="crestMarker" cx="720" cy="900" r="13" fill="#F3EBDD" stroke="#202422" stroke-width="4" />
+      </svg>
+    </div>
+    <div class="crest-face crest-back">
+      <svg viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="crestSkyBack" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#3f7d9c" /><stop offset="100%" stop-color="#dcedf2" />
+          </linearGradient>
+        </defs>
+        <rect width="1440" height="900" fill="#123B2A" />
+        <rect x="0" y="0" width="1440" height="300" fill="url(#crestSkyBack)" />
+        <polygon fill="#788F52" opacity="0.6" points="0,300 0,250 220,215 460,255 700,200 940,250 1180,220 1440,245 1440,300" />
+        <rect x="0" y="300" width="1440" height="600" fill="#788F52" opacity="0.32" />
+        <g opacity="0.85">
+          <ellipse cx="150" cy="440" rx="28" ry="26" fill="#123B2A" opacity="0.8" /><ellipse cx="135" cy="422" rx="16" ry="15" fill="#1B4A34" opacity="0.8" />
+          <ellipse cx="1300" cy="470" rx="26" ry="24" fill="#0D2E20" opacity="0.8" /><ellipse cx="1300" cy="452" rx="15" ry="17" fill="#1B4A34" opacity="0.8" />
+          <ellipse cx="90" cy="680" rx="24" ry="22" fill="#123B2A" opacity="0.7" />
+          <ellipse cx="1360" cy="700" rx="22" ry="20" fill="#0D2E20" opacity="0.7" />
+        </g>
+        <!-- hairpin road continuing down the other side -->
+        <path d="M 720,150 Q 1020,220 700,300 Q 380,400 680,500 Q 980,600 700,680 Q 420,760 720,900" fill="none" stroke="#A79C86" stroke-width="42" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M 720,150 Q 1020,220 700,300 Q 380,400 680,500 Q 980,600 700,680 Q 420,760 720,900" fill="none" stroke="#F3EBDD" stroke-width="5" stroke-dasharray="4 20" stroke-linecap="round" />
+      </svg>
+    </div>
+  </div>
+</div>
+
 <!-- OPENING SCENE: pinned scroll-through journey, one continuous tall illustration read top to
      bottom — open sky, down to where the skyline ridge meets the green mountains, down onto the
      roads (Old La Honda, then West Alpine Road). A floating card holds each scene's copy; the
@@ -144,8 +204,8 @@
 
       <!-- ===== SCENE 2: OLD LA HONDA — the climb, trees lining the road ===== -->
       <rect x="0" y="1440" width="1440" height="1440" fill="#123B2A" />
-      <path d="M 720,1440 Q 660,1650 720,1750 Q 780,1850 715,1950 Q 650,2050 705,2165 Q 760,2280 730,2390 Q 700,2500 670,2600 Q 640,2700 720,2880" fill="none" stroke="#A79C86" stroke-width="72" stroke-linecap="round" stroke-linejoin="round" />
-      <path d="M 720,1440 Q 660,1650 720,1750 Q 780,1850 715,1950 Q 650,2050 705,2165 Q 760,2280 730,2390 Q 700,2500 670,2600 Q 640,2700 720,2880" fill="none" stroke="#F3EBDD" stroke-width="5" stroke-dasharray="4 20" stroke-linecap="round" />
+      <path d="M 720,1440 Q 400,1600 700,1690 Q 1000,1780 690,1870 Q 380,1960 700,2050 Q 1020,2140 710,2230 Q 400,2320 700,2410 Q 1000,2500 710,2590 Q 420,2680 720,2880" fill="none" stroke="#A79C86" stroke-width="60" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M 720,1440 Q 400,1600 700,1690 Q 1000,1780 690,1870 Q 380,1960 700,2050 Q 1020,2140 710,2230 Q 400,2320 700,2410 Q 1000,2500 710,2590 Q 420,2680 720,2880" fill="none" stroke="#F3EBDD" stroke-width="5" stroke-dasharray="4 20" stroke-linecap="round" />
       <g opacity="0.95">
         <use href="#treeA" x="60" y="1490" width="66" height="72" />
         <use href="#treeB" x="1310" y="1470" width="60" height="66" />
@@ -164,13 +224,13 @@
         <use href="#treeB" x="100" y="2800" width="58" height="64" />
         <use href="#treeA" x="1290" y="2790" width="64" height="70" />
       </g>
-      <circle cx="700" cy="1950" r="16" fill="#F3EBDD" stroke="#202422" stroke-width="4" />
+      <circle cx="700" cy="1960" r="16" fill="#F3EBDD" stroke="#202422" stroke-width="4" />
 
       <!-- ===== SCENE 3: WEST ALPINE ROAD — over the ridge, open ground ===== -->
       <rect x="0" y="2880" width="1440" height="1440" fill="url(#grassGrad)" />
       <polygon fill="#6FA9C9" opacity="0.3" points="0,2985 0,2945 200,2905 420,2952 640,2892 860,2942 1080,2900 1300,2946 1440,2912 1440,2985" />
-      <path d="M 720,2880 Q 660,3080 710,3180 Q 760,3280 720,3380 Q 680,3480 690,3540 Q 700,3600 680,3700 Q 660,3800 690,3900 Q 720,4000 700,4200" fill="none" stroke="#A79C86" stroke-width="66" stroke-linecap="round" stroke-linejoin="round" />
-      <path d="M 720,2880 Q 660,3080 710,3180 Q 760,3280 720,3380 Q 680,3480 690,3540 Q 700,3600 680,3700 Q 660,3800 690,3900 Q 720,4000 700,4200" fill="none" stroke="#F3EBDD" stroke-width="5" stroke-dasharray="4 20" stroke-linecap="round" />
+      <path d="M 720,2880 Q 1000,3060 700,3150 Q 400,3240 710,3330 Q 1020,3420 700,3510 Q 380,3600 690,3690 Q 1000,3780 710,3870 Q 420,3960 700,4200" fill="none" stroke="#A79C86" stroke-width="54" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M 720,2880 Q 1000,3060 700,3150 Q 400,3240 710,3330 Q 1020,3420 700,3510 Q 380,3600 690,3690 Q 1000,3780 710,3870 Q 420,3960 700,4200" fill="none" stroke="#F3EBDD" stroke-width="5" stroke-dasharray="4 20" stroke-linecap="round" />
       <g opacity="0.9">
         <use href="#treeA" x="80" y="2980" width="54" height="60" />
         <use href="#treeB" x="1300" y="3040" width="52" height="58" />
@@ -181,42 +241,8 @@
         <use href="#treeB" x="150" y="4080" width="48" height="54" />
         <use href="#treeA" x="1270" y="4100" width="54" height="60" />
       </g>
-      <circle cx="700" cy="3600" r="16" fill="#F3EBDD" stroke="#202422" stroke-width="4" />
+      <circle cx="690" cy="3600" r="16" fill="#F3EBDD" stroke="#202422" stroke-width="4" />
     </svg>
-  </div>
-
-  <!-- Crest-flip transition: plays only during the La Honda -> West Alpine scroll segment. A
-       marker climbs the front face's short road stub, the card zooms in, then the whole thing
-       does a 3D flip (rotateY) to its back face — "cresting the ridge" and landing on the other
-       side. The real .scene-track snaps to the West Alpine position while this overlay is fully
-       opaque, so the jump is hidden. See buildSceneScroll() in js/main.js. -->
-  <div class="crest-flip" id="crestFlip">
-    <div class="crest-flip-inner" id="crestFlipInner">
-      <div class="crest-face crest-front">
-        <svg viewBox="0 0 400 400" aria-hidden="true">
-          <rect width="400" height="400" fill="#123B2A" />
-          <rect x="0" y="0" width="400" height="90" fill="#6FA9C9" />
-          <polygon fill="#0D2E20" points="0,90 0,60 60,40 130,65 200,30 270,60 340,35 400,55 400,90" />
-          <ellipse cx="55" cy="165" rx="26" ry="24" fill="#0D2E20" /><ellipse cx="45" cy="150" rx="15" ry="14" fill="#1B4A34" />
-          <ellipse cx="345" cy="175" rx="24" ry="22" fill="#123B2A" /><ellipse cx="345" cy="158" rx="13" ry="15" fill="#1B4A34" />
-          <ellipse cx="35" cy="300" rx="28" ry="26" fill="#0D2E20" /><ellipse cx="25" cy="284" rx="16" ry="15" fill="#1B4A34" />
-          <ellipse cx="365" cy="310" rx="26" ry="24" fill="#123B2A" /><ellipse cx="365" cy="292" rx="14" ry="16" fill="#1B4A34" />
-          <path id="crestRoadFront" d="M 200,400 Q 170,300 210,220 Q 240,150 200,90" fill="none" stroke="#A79C86" stroke-width="34" stroke-linecap="round" />
-          <path d="M 200,400 Q 170,300 210,220 Q 240,150 200,90" fill="none" stroke="#F3EBDD" stroke-width="4" stroke-dasharray="3 14" stroke-linecap="round" />
-          <circle id="crestMarker" cx="200" cy="400" r="9" fill="#F3EBDD" stroke="#202422" stroke-width="3" />
-        </svg>
-      </div>
-      <div class="crest-face crest-back">
-        <svg viewBox="0 0 400 400" aria-hidden="true">
-          <rect width="400" height="400" fill="#123B2A" />
-          <rect x="0" y="0" width="400" height="150" fill="#6FA9C9" />
-          <polygon fill="#788F52" opacity="0.65" points="0,150 0,115 70,95 150,120 230,90 300,115 400,98 400,150" />
-          <rect x="0" y="150" width="400" height="250" fill="#788F52" opacity="0.3" />
-          <path d="M 200,90 Q 232,180 190,260 Q 158,330 200,400" fill="none" stroke="#A79C86" stroke-width="30" stroke-linecap="round" />
-          <path d="M 200,90 Q 232,180 190,260 Q 158,330 200,400" fill="none" stroke="#F3EBDD" stroke-width="4" stroke-dasharray="3 14" stroke-linecap="round" />
-        </svg>
-      </div>
-    </div>
   </div>
 
   <div class="scene-labels">

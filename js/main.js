@@ -116,7 +116,7 @@ function buildSceneScroll() {
       id: 'sceneScroll',
       trigger: pin,
       start: 'top top',
-      end: () => '+=' + pin.clientHeight * 5.5,
+      end: () => '+=' + pin.clientHeight * 6.5,
       scrub: true,
       pin: true,
       invalidateOnRefresh: true,
@@ -136,14 +136,14 @@ function buildSceneScroll() {
     tl.to(crestFlip, { opacity: 1, duration: 0.7 }, '<')
       .to(markerProxy, {
         p: 1,
-        duration: 1.3,
+        duration: 1.8,
         ease: 'power1.inOut',
         onUpdate: () => updateMarker && updateMarker(markerProxy.p),
       }, '<0.15')
-      .to(crestFlipInner, { scale: 1.22, duration: 1.3, ease: 'power1.in' }, '<')
-      .to(crestFlipInner, { rotationY: 180, duration: 1.8, ease: 'power2.inOut' })
+      .to(crestFlipInner, { scale: 1.55, duration: 1.8, ease: 'power1.in' }, '<')
+      .to(crestFlipInner, { rotationY: 180, duration: 2.1, ease: 'power2.inOut' })
       .set(track, { y: -distance }) // hidden snap — overlay is still fully opaque here
-      .to(crestFlipInner, { scale: 1, duration: 0.9, ease: 'power1.out' }, '<')
+      .to(crestFlipInner, { scale: 1, duration: 1.1, ease: 'power1.out' }, '<')
       .to({}, { duration: 0.3 })
       .to(crestFlip, { opacity: 0, duration: 0.7 });
   } else {
