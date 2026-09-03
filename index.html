@@ -9,75 +9,12 @@
 </head>
 <body>
 
-<!-- ============================================================ -->
-<!-- TEMPORARY: under-construction overlay. Self-contained on      -->
-<!-- purpose (markup + styles + dismiss logic all in this one      -->
-<!-- block) — to remove later, just delete everything between      -->
-<!-- these two comment markers, nothing else to clean up elsewhere. -->
-<div id="constructionOverlay">
-  <style>
-    #constructionOverlay {
-      position: fixed;
-      inset: 0;
-      z-index: 999;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    #constructionOverlay .tape-band {
-      position: absolute;
-      top: 50%; left: 50%;
-      width: 150vmax;
-      height: 64px;
-      margin-top: -32px;
-      margin-left: -75vmax;
-      background: repeating-linear-gradient(
-        45deg,
-        #c0392b, #c0392b 40px,
-        #1a1a1a 40px, #1a1a1a 80px
-      );
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 24px rgba(0,0,0,0.4);
-    }
-    #constructionOverlay .tape-band.a { transform: rotate(20deg); }
-    #constructionOverlay .tape-band.b { transform: rotate(-20deg); }
-    #constructionOverlay .tape-band span {
-      color: #fff;
-      font-family: 'Anton', 'Inter', sans-serif;
-      font-size: 1.1rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.6);
-      white-space: nowrap;
-    }
-    #constructionOverlay .dismiss {
-      position: absolute;
-      top: 20px; right: 20px;
-      z-index: 1000;
-      pointer-events: auto;
-      background: #1a1a1a;
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 36px; height: 36px;
-      font-size: 1.1rem;
-      cursor: pointer;
-    }
-  </style>
-  <div class="tape-band a"><span>&#9888; Under Construction &middot; Under Construction &middot; Under Construction &#9888;</span></div>
-  <div class="tape-band b"><span>&#9888; Under Construction &middot; Under Construction &middot; Under Construction &#9888;</span></div>
-  <button class="dismiss" onclick="document.getElementById('constructionOverlay').remove()" aria-label="Dismiss">&times;</button>
-</div>
-<!-- END TEMPORARY under-construction overlay -->
-<!-- ============================================================ -->
-
 <div class="announce-bar">
   <a href="https://www.strava.com/clubs/skylinevelo" target="_blank" rel="noopener">Follow the club on Strava &rarr;</a>
 </div>
 
 <nav class="site-nav" id="siteNav">
-  <div class="brand"><a href="index.html"><span class="brand-mark">S</span><span class="brand-word">Skyline Velo<span class="dot">.</span>CC</span></a></div>
+  <div class="brand"><a href="index.html"><span class="brand-mark">S</span><span class="brand-word">Skyline Velo<span class="dot">.</span>cc</span></a></div>
   <div class="links" id="navLinks">
     <a class="page-link" href="events.html">Events</a>
     <a class="page-link" href="roster.html">Roster</a>
@@ -93,66 +30,6 @@
   </div>
   <button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
 </nav>
-
-<!-- Crest-flip transition: a FULL-VIEWPORT takeover (not a card), lives at body level — fixed
-     positioning + z-index 500 so it sits above nav/announce-bar too, and can never get trapped by
-     the transform GSAP applies to #scenePin for pinning (see the note in css/style.css above
-     .crest-flip). Plays only during the La Honda -> West Alpine scroll segment: a marker climbs
-     the front face's hairpin road stub, the whole screen zooms toward the crest, then flips 180deg
-     (rotationY) to its back face — cresting the ridge and landing on the other side. The real
-     .scene-track snaps to the West Alpine position while this is fully opaque, so the jump under
-     it is never visible. See buildSceneScroll() in js/main.js. -->
-<div class="crest-flip" id="crestFlip">
-  <div class="crest-flip-inner" id="crestFlipInner">
-    <div class="crest-face crest-front">
-      <svg viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
-        <defs>
-          <linearGradient id="crestSkyFront" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#3f7d9c" /><stop offset="100%" stop-color="#8fc3de" />
-          </linearGradient>
-        </defs>
-        <rect width="1440" height="900" fill="#123B2A" />
-        <rect x="0" y="0" width="1440" height="220" fill="url(#crestSkyFront)" />
-        <polygon fill="#4C7A63" opacity="0.6" points="0,220 0,170 220,140 460,175 700,120 940,170 1180,135 1440,165 1440,220" />
-        <polygon fill="#0D2E20" points="0,900 0,300 180,240 340,290 500,210 660,270 820,190 980,260 1140,200 1300,270 1440,220 1440,900" />
-        <g opacity="0.95">
-          <ellipse cx="120" cy="360" rx="34" ry="32" fill="#0D2E20" /><ellipse cx="104" cy="338" rx="20" ry="19" fill="#1B4A34" />
-          <ellipse cx="1320" cy="380" rx="32" ry="30" fill="#123B2A" /><ellipse cx="1320" cy="358" rx="18" ry="21" fill="#1B4A34" />
-          <ellipse cx="70" cy="520" rx="36" ry="34" fill="#123B2A" /><ellipse cx="52" cy="498" rx="21" ry="20" fill="#1B4A34" />
-          <ellipse cx="1370" cy="540" rx="34" ry="32" fill="#0D2E20" /><ellipse cx="1370" cy="518" rx="19" ry="22" fill="#1B4A34" />
-          <ellipse cx="150" cy="700" rx="38" ry="36" fill="#0D2E20" /><ellipse cx="132" cy="676" rx="22" ry="21" fill="#1B4A34" />
-          <ellipse cx="1290" cy="720" rx="36" ry="34" fill="#123B2A" /><ellipse cx="1290" cy="696" rx="20" ry="23" fill="#1B4A34" />
-        </g>
-        <!-- hairpin road stub climbing to the crest — an S, not an L -->
-        <path id="crestRoadFront" d="M 720,900 Q 420,760 700,680 Q 980,600 680,500 Q 380,400 700,300 Q 1000,220 720,150" fill="none" stroke="#A79C86" stroke-width="46" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M 720,900 Q 420,760 700,680 Q 980,600 680,500 Q 380,400 700,300 Q 1000,220 720,150" fill="none" stroke="#F3EBDD" stroke-width="5" stroke-dasharray="4 20" stroke-linecap="round" />
-        <circle id="crestMarker" cx="720" cy="900" r="13" fill="#F3EBDD" stroke="#202422" stroke-width="4" />
-      </svg>
-    </div>
-    <div class="crest-face crest-back">
-      <svg viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
-        <defs>
-          <linearGradient id="crestSkyBack" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#3f7d9c" /><stop offset="100%" stop-color="#dcedf2" />
-          </linearGradient>
-        </defs>
-        <rect width="1440" height="900" fill="#123B2A" />
-        <rect x="0" y="0" width="1440" height="300" fill="url(#crestSkyBack)" />
-        <polygon fill="#788F52" opacity="0.6" points="0,300 0,250 220,215 460,255 700,200 940,250 1180,220 1440,245 1440,300" />
-        <rect x="0" y="300" width="1440" height="600" fill="#788F52" opacity="0.32" />
-        <g opacity="0.85">
-          <ellipse cx="150" cy="440" rx="28" ry="26" fill="#123B2A" opacity="0.8" /><ellipse cx="135" cy="422" rx="16" ry="15" fill="#1B4A34" opacity="0.8" />
-          <ellipse cx="1300" cy="470" rx="26" ry="24" fill="#0D2E20" opacity="0.8" /><ellipse cx="1300" cy="452" rx="15" ry="17" fill="#1B4A34" opacity="0.8" />
-          <ellipse cx="90" cy="680" rx="24" ry="22" fill="#123B2A" opacity="0.7" />
-          <ellipse cx="1360" cy="700" rx="22" ry="20" fill="#0D2E20" opacity="0.7" />
-        </g>
-        <!-- hairpin road continuing down the other side -->
-        <path d="M 720,150 Q 1020,220 700,300 Q 380,400 680,500 Q 980,600 700,680 Q 420,760 720,900" fill="none" stroke="#A79C86" stroke-width="42" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M 720,150 Q 1020,220 700,300 Q 380,400 680,500 Q 980,600 700,680 Q 420,760 720,900" fill="none" stroke="#F3EBDD" stroke-width="5" stroke-dasharray="4 20" stroke-linecap="round" />
-      </svg>
-    </div>
-  </div>
-</div>
 
 <!-- OPENING SCENE: pinned scroll-through journey, one continuous tall illustration read top to
      bottom — open sky, down to where the skyline ridge meets the green mountains, down onto the
@@ -246,28 +123,45 @@
   </div>
 
   <div class="scene-labels">
-    <div class="scene-label" id="sceneLabel0">
-      <div class="scene-card">
-        <div class="hero-eyebrow">SF Peninsula &middot; 18 &amp; Under &middot; Free</div>
-        <h2>Skyline Velo <em>Cycling Club</em></h2>
-        <p>A junior cycling club built around the Bay Area's toughest local climbs — group rides, segment rivalries, and open recruitment.</p>
-        <div class="scroll-row"><span>Scroll</span><span class="bar"></span></div>
-      </div>
+    <!-- Scene 1: big text filling the sky, no card. -->
+    <div class="scene-label scene-hero-text" id="sceneLabel0">
+      <div class="hero-eyebrow">SF Peninsula &middot; 18 &amp; Under &middot; Free</div>
+      <h1 class="sky-title">
+        <span class="line">Skyline Velo</span>
+        <span class="line sub">U18 Cycling Club</span>
+      </h1>
     </div>
-    <div class="scene-label scene-label-left" id="sceneLabel1">
-      <div class="scene-card">
+    <!-- Scene 2: Old La Honda — the events-page route-card content split across either side of
+         the road: meta (badge/time/location) on the left, deeper description on the right. -->
+    <div class="scene-label scene-split" id="sceneLabel1">
+      <div class="scene-flank scene-flank-left">
+        <div class="flank-badge">Anchor Ride</div>
         <div class="hero-eyebrow">Wednesday &middot; Anchor Ride</div>
+        <div class="flank-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg> Every Wednesday &middot; evening &middot; time TBA</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z" /><circle cx="12" cy="9" r="2.5" /></svg> Meet at Stanford Hills Park</span>
+        </div>
+      </div>
+      <div class="scene-flank scene-flank-right">
         <h2><em>Old</em> La Honda</h2>
-        <p>Where the rivalry started — a short, brutal climb in Woodside that's basically the club's home turf.</p>
-        <div class="scroll-row"><span>Scroll</span><span class="bar" id="sceneProgressBar1"></span></div>
+        <p>The club's original ride — before there was a club, there was a group chat ranking each other on this exact Strava segment. A short, steep climb that's become the anchor of the whole week: show up, chase the segment, go home.</p>
+        <div class="tag-row"><span>Wednesday</span><span>Short &amp; Steep</span></div>
       </div>
     </div>
-    <div class="scene-label" id="sceneLabel2">
-      <div class="scene-card">
-        <div class="hero-eyebrow">Saturday &middot; Long Ride</div>
+    <!-- Scene 3: West Alpine Road — mirrored, description on the left, meta on the right. -->
+    <div class="scene-label scene-split" id="sceneLabel2">
+      <div class="scene-flank scene-flank-left">
         <h2>West <em>Alpine</em> Road</h2>
-        <p>The weekend route climbs over the ridge into open, quiet road — the long ride the whole week points toward.</p>
-        <div class="scroll-row"><span>Scroll</span><span class="bar" id="sceneProgressBar2"></span></div>
+        <p>The weekend's longer ride climbs out past the ridge and onto West Alpine Road — quieter, more open, less about chasing a single segment and more about putting in real miles together.</p>
+        <div class="tag-row"><span>Saturday</span><span>Open &amp; Long</span></div>
+      </div>
+      <div class="scene-flank scene-flank-right">
+        <div class="flank-badge">Long Ride</div>
+        <div class="hero-eyebrow">Saturday &middot; Long Ride</div>
+        <div class="flank-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg> Every Saturday &middot; time TBA</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z" /><circle cx="12" cy="9" r="2.5" /></svg> Meet at Stanford Hills Park</span>
+        </div>
       </div>
     </div>
   </div>

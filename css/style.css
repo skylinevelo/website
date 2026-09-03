@@ -316,34 +316,6 @@ footer.site-footer .watermark {
 }
 .scene-track svg { display: block; width: 100%; height: 100%; }
 
-/* Crest-flip transition — a FULL-VIEWPORT takeover, not a card. Lives outside #scenePin in the
-   DOM (fixed positioning + high z-index, sibling of nav/announce-bar) specifically so GSAP's pin
-   wrapper (which applies its own transform to #scenePin) can never trap or reorder its stacking —
-   it needs to cover the entire page, nav and announce-bar included, while it plays. See the HTML
-   comment above #crestFlip for the sequence. */
-.crest-flip {
-  position: fixed;
-  inset: 0;
-  z-index: 500;
-  perspective: 2200px;
-  opacity: 0;
-  pointer-events: none;
-}
-.crest-flip-inner {
-  position: absolute;
-  inset: 0;
-  transform-style: preserve-3d;
-  transform-origin: 50% 17%;
-}
-.crest-face {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-}
-.crest-face svg { display: block; width: 100%; height: 100%; }
-.crest-face.crest-front { transform: rotateY(0deg); }
-.crest-face.crest-back { transform: rotateY(180deg); }
-
 .scene-labels { position: absolute; inset: 0; pointer-events: none; display: flex; align-items: flex-start; justify-content: center; padding-top: 24vh; }
 .scene-label {
   position: absolute;
@@ -353,57 +325,98 @@ footer.site-footer .watermark {
   width: 100%;
   padding: 0 24px;
 }
-/* Old La Honda's card sits to the left of the road, not centered over it. */
-.scene-label.scene-label-left { justify-content: flex-start; padding-left: max(24px, 8vw); }
 
-/* Floating notched card — holds each scene's copy + a scroll-progress readout. Reference: a small
-   dark card centered over a full-bleed illustration, text swapping as the background scene changes
-   underneath it (styles.refero.design/style/34baa524-5d5b-4165-bbab-d01f05e6d6b9). */
-.scene-card {
-  width: min(88vw, 440px);
-  background: var(--charcoal);
-  border: 1px solid var(--hairline-dark);
-  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
-  padding: 26px 28px 22px;
-  text-align: left;
+/* Scene 1 — big text directly over the sky, no card. */
+.scene-label.scene-hero-text {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 4vh;
 }
-.scene-card .hero-eyebrow {
+.scene-hero-text .hero-eyebrow {
   color: var(--accent);
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  font-size: 0.66rem;
-  margin-bottom: 10px;
+  font-size: 0.76rem;
+  margin-bottom: 18px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.4);
 }
-.scene-card h2 {
-  font-size: clamp(1.5rem, 3.4vw, 2.15rem);
-  line-height: 1.08;
+.sky-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  line-height: 0.94;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+  text-shadow: 0 6px 26px rgba(0,0,0,0.4);
+}
+.sky-title .line { display: block; font-size: clamp(3rem, 10vw, 7.4rem); }
+.sky-title .line.sub {
+  margin-top: 0.18em;
+  font-size: clamp(1.3rem, 4vw, 2.4rem);
+  color: var(--charcoal);
+  letter-spacing: 0.03em;
+}
+
+/* Scenes 2 & 3 — the events-page route-card content flanking either side of the road, instead of
+   one boxed-in card. Light text with a shadow for legibility over the varied illustration behind
+   it, not a solid card background — matches the "no black square" direction. */
+.scene-label.scene-split {
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 0 max(20px, 4vw);
+}
+.scene-flank {
+  width: min(30vw, 340px);
+  min-width: 230px;
   color: var(--paper);
 }
-.scene-card h2 em { color: var(--accent-deep); font-style: italic; }
-.scene-card p {
-  color: var(--graphite-dark);
-  font-size: 0.92rem;
-  line-height: 1.5;
-  margin-top: 12px;
-}
-.scene-card .scroll-row {
-  margin-top: 22px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--graphite-dark);
-  font-size: 0.62rem;
-  text-transform: uppercase;
+.scene-flank .hero-eyebrow {
+  color: var(--accent);
+  font-weight: 600;
   letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.68rem;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
-.scene-card .scroll-row .bar { width: 36px; height: 2px; background: var(--vellum); position: relative; overflow: hidden; }
-.scene-card .scroll-row .bar::after {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: var(--scroll-progress, 0%);
-  background: var(--accent-deep);
+.scene-flank .flank-badge {
+  display: inline-block;
+  border: 1px solid var(--accent-deep);
+  color: var(--accent);
+  background: rgba(18,59,42,0.55);
+  font-size: 0.66rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+.scene-flank .flank-meta { display: flex; flex-direction: column; gap: 8px; font-size: 0.82rem; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+.scene-flank .flank-meta span { display: flex; align-items: center; gap: 8px; }
+.scene-flank .flank-meta svg { width: 14px; height: 14px; flex: 0 0 auto; color: var(--accent-deep); }
+.scene-flank h2 { font-size: clamp(1.6rem, 3.2vw, 2.3rem); text-shadow: 0 4px 16px rgba(0,0,0,0.5); }
+.scene-flank h2 em { color: var(--accent-deep); font-style: italic; }
+.scene-flank p { margin-top: 12px; font-size: 0.92rem; line-height: 1.55; color: var(--graphite-dark); text-shadow: 0 2px 10px rgba(0,0,0,0.55); }
+.scene-flank .tag-row { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
+.scene-flank .tag-row span {
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--accent);
+  background: rgba(18,59,42,0.5);
+  border: 1px solid var(--accent-deep);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+@media (max-width: 900px) {
+  .scene-label.scene-split { flex-direction: column; justify-content: center; gap: 16px; padding-top: 16vh; text-align: center; }
+  .scene-flank { width: min(88vw, 420px); }
+  .scene-flank .flank-meta { align-items: center; }
+  .scene-flank .flank-meta span { justify-content: center; }
 }
 
 .eyebrow {

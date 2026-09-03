@@ -6,14 +6,15 @@
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Opening-scene entrance on load — scoped to the first scene's card only. Scenes 1 & 2 start at
+// Opening-scene entrance on load — scoped to the first scene's text only. Scenes 1 & 2 start at
 // opacity 0 and are brought in purely by scroll progress (see buildSceneScroll below), never by
 // this load-time tween.
 gsap.set('#sceneLabel0', { opacity: 1 });
-gsap.from('#sceneLabel0 .scene-card', {
+gsap.from('#sceneLabel0 .hero-eyebrow, #sceneLabel0 .sky-title .line', {
   y: 24,
   opacity: 0,
   duration: 0.8,
+  stagger: 0.1,
   delay: 0.3,
   ease: 'power3.out',
 });
@@ -58,31 +59,13 @@ if (siteNav) {
   });
 }
 
-// A dot climbing the crest-flip front face's short road stub, using the path's own native length
-// rather than hand-picked coordinates — works regardless of how that path's curve is tuned later.
-function buildCrestMarkerUpdater() {
-  const roadStub = document.querySelector('#crestRoadFront');
-  const marker = document.querySelector('#crestMarker');
-  if (!roadStub || !marker) return null;
-  const len = roadStub.getTotalLength();
-  return (progress) => {
-    const pt = roadStub.getPointAtLength(len * Math.min(Math.max(progress, 0), 1));
-    marker.setAttribute('cx', pt.x);
-    marker.setAttribute('cy', pt.y);
-  };
-}
-
 // Opening scene: pins the section for a single scrubbed timeline that plays three sequential
-// beats per chapter change — card text fades out, THEN the tall illustration shifts up to the next
-// chapter, THEN the new card's text fades in — rather than a continuous crossfade. Track height is
-// 3x the pin height by design (.scene-track in css/style.css is 300vh), so it always has exactly
-// two chapter-shifts' worth of travel regardless of viewport size.
-//
-// The La Honda -> West Alpine shift specifically gets a richer transition instead of a plain
-// translate: a marker climbs the crest-flip overlay's road stub, the card zooms in, then flips
-// 180deg (rotationY) to its back face — "cresting the ridge and coming out the other side," per
-// Ray's steer (2026-09-02). The real .scene-track still just gets a y snap underneath, timed to
-// happen while the overlay is fully opaque so the jump is never visible.
+// beats per chapter change — text fades out, THEN the tall illustration shifts up to the next
+// chapter, THEN the new text fades in — rather than a continuous crossfade. Track height is 3x the
+// pin height by design (.scene-track in css/style.css is 300vh), so it always has exactly two
+// chapter-shifts' worth of travel regardless of viewport size. (The La Honda -> West Alpine shift
+// previously had a full-viewport zoom/flip transition here — removed per Ray's call, 2026-09-02;
+// back to a plain translate like the other shift.)
 function buildSceneScroll() {
   const pin = document.querySelector('#scenePin');
   const track = document.querySelector('#sceneTrack');
@@ -91,10 +74,6 @@ function buildSceneScroll() {
     document.querySelector('#sceneLabel1'),
     document.querySelector('#sceneLabel2'),
   ];
-  const bars = document.querySelectorAll('.scene-card .bar');
-  const crestFlip = document.querySelector('#crestFlip');
-  const crestFlipInner = document.querySelector('#crestFlipInner');
-  const updateMarker = buildCrestMarkerUpdater();
   if (!pin || !track || labels.some((l) => !l)) return;
 
   ScrollTrigger.getById('sceneScroll')?.kill();
@@ -106,23 +85,16 @@ function buildSceneScroll() {
   gsap.set(labels[0], { opacity: 1 });
   gsap.set([labels[1], labels[2]], { opacity: 0 });
   gsap.set(track, { y: 0 });
-  if (crestFlip) gsap.set(crestFlip, { opacity: 0 });
-  if (crestFlipInner) gsap.set(crestFlipInner, { rotationY: 0, scale: 1 });
-  const markerProxy = { p: 0 };
-  if (updateMarker) updateMarker(0);
 
   const tl = gsap.timeline({
     scrollTrigger: {
       id: 'sceneScroll',
       trigger: pin,
       start: 'top top',
-      end: () => '+=' + pin.clientHeight * 6.5,
+      end: () => '+=' + pin.clientHeight * 4.5,
       scrub: true,
       pin: true,
       invalidateOnRefresh: true,
-      onUpdate: (self) => {
-        bars.forEach((bar) => bar.style.setProperty('--scroll-progress', (self.progress * 100).toFixed(1) + '%'));
-      },
     },
   });
 
@@ -130,27 +102,9 @@ function buildSceneScroll() {
     .to(track, { y: -step, duration: 1.6, ease: 'power1.inOut' })
     .to(labels[1], { opacity: 1, duration: 1 })
     .to({}, { duration: 1.6 }) // hold — reading time on Old La Honda
-    .to(labels[1], { opacity: 0, duration: 1 });
-
-  if (crestFlip && crestFlipInner) {
-    tl.to(crestFlip, { opacity: 1, duration: 0.7 }, '<')
-      .to(markerProxy, {
-        p: 1,
-        duration: 1.8,
-        ease: 'power1.inOut',
-        onUpdate: () => updateMarker && updateMarker(markerProxy.p),
-      }, '<0.15')
-      .to(crestFlipInner, { scale: 1.55, duration: 1.8, ease: 'power1.in' }, '<')
-      .to(crestFlipInner, { rotationY: 180, duration: 2.1, ease: 'power2.inOut' })
-      .set(track, { y: -distance }) // hidden snap — overlay is still fully opaque here
-      .to(crestFlipInner, { scale: 1, duration: 1.1, ease: 'power1.out' }, '<')
-      .to({}, { duration: 0.3 })
-      .to(crestFlip, { opacity: 0, duration: 0.7 });
-  } else {
-    tl.to(track, { y: -distance, duration: 1.6, ease: 'power1.inOut' });
-  }
-
-  tl.to(labels[2], { opacity: 1, duration: 1 })
+    .to(labels[1], { opacity: 0, duration: 1 })
+    .to(track, { y: -distance, duration: 1.6, ease: 'power1.inOut' })
+    .to(labels[2], { opacity: 1, duration: 1 })
     .to({}, { duration: 1.6 }); // hold at West Alpine Road
 }
 
