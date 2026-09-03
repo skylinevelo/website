@@ -1,21 +1,30 @@
 /* Skyline Velo Cycling Club — shared site styles
-   Forest green ground, cream primary text, sky blue accent, charcoal for nav/footer depth.
-   Palette from the club's brand mockup (2026-09-01): #123B2A / #F3EBDD / #6FA9C9 / #202422. */
+   2026-09-02: palette reverted to the club's original brand colors (forest green / cream / sky
+   blue / charcoal — the same set from the 2026-09-01 brand mockup) per Ray's call — the monochrome
+   warm-gray system from earlier today is gone. Kept from that pass: the pill buttons, hairline
+   borders, flat imagery, serif+grotesk type pairing, and structural layout (nav, page-hero/
+   page-body split, hexagon dividers, circular leader photos). Cream is now the primary accent,
+   sky blue a secondary one, charcoal reserved for nav/footer depth and button text — see
+   decisions-log.md 2026-09-02. Variable NAMES below are carried over from the monochrome build so
+   the rest of this file (and every page's markup) didn't need to change, only what they resolve to. */
 
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --bg: #123B2A;         /* forest green — main ground */
-  --bg-raised: #0D2E20;  /* darker forest green — cards/raised surfaces */
-  --line: #2A5A42;       /* mid forest green — borders/dividers */
-  --ink: #F3EBDD;        /* cream — primary text (light-on-dark now, not dark-on-light) */
-  --white: #F3EBDD;      /* legacy alias used as primary text color below */
-  --dim: #A9C2B4;        /* muted cream-green — secondary text */
-  --accent: #6FA9C9;     /* sky blue — accent text/highlights, replaces orange */
-  --accent-dim: #1E3F4E; /* darker blue tint, for subtle accent backgrounds */
+  --putty: #123B2A;      /* dominant ground — forest green (site is uniformly dark again) */
+  --ink: #123B2A;        /* dark bg — forest green */
+  --bone: #0D2E20;       /* raised card surface — darker forest green */
+  --chalk: #123B2A;      /* body/footer base — forest green, same as --ink/--putty */
   --charcoal: #202422;   /* fourth brand color — nav/footer depth, distinct from the greens */
-  --btn-text: #F3EBDD;   /* light text for solid accent buttons, independent of --bg */
-  --max-w: 1100px;
+  --vellum: #2A5A42;     /* hairline borders */
+  --graphite: #A9C2B4;   /* muted secondary text — dim cream-green */
+  --graphite-dark: #A9C2B4;
+  --hairline-dark: #2A5A42;
+  --ash: #2F4A3A;        /* image-placeholder fill */
+  --paper: #F3EBDD;      /* cream — primary text on dark */
+  --accent: #F3EBDD;     /* primary accent — cream */
+  --accent-deep: #6FA9C9; /* secondary accent — sky blue */
+  --max-w: 1120px;
 }
 
 * { box-sizing: border-box; }
@@ -24,8 +33,8 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--white);
+  background: var(--chalk);
+  color: var(--paper);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -41,116 +50,141 @@ img { max-width: 100%; }
 }
 
 h1, h2, h3, .display {
-  font-family: 'Anton', 'Inter', sans-serif;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
-  line-height: 1.02;
+  font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+  font-weight: 500;
+  font-optical-sizing: auto;
+  letter-spacing: -0.01em;
+  line-height: 0.98;
   margin: 0;
+  color: var(--paper);
 }
 
-a { color: var(--accent); text-decoration: none; }
+a { color: var(--accent-deep); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-.accent { color: var(--accent); }
+.accent { color: var(--accent-deep); }
+.section-dark .accent, .scene-pin .accent { color: var(--accent); }
+
+.label {
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+/* ---------- Section utilities ---------- */
+/* Site is uniformly dark again (back to the original), so these three no longer diverge visually —
+   kept as-is so page markup didn't need touching, just given a shared dark resolution. */
+.section-dark { background: var(--ink); color: var(--paper); }
+.section-dark .lede, .section-dark p { color: var(--graphite-dark); }
+.section-light { background: var(--putty); color: var(--paper); }
+.section-chalk { background: var(--chalk); color: var(--paper); }
 
 /* ---------- Nav ---------- */
-/* Thin top strip above the nav — links out, doesn't scroll away. */
 .announce-bar {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 101;
-  background: var(--ink);
-  color: var(--bg);
+  background: var(--charcoal);
+  color: var(--paper);
   text-align: center;
-  padding: 10px 16px;
-  font-size: 0.8rem;
-  font-weight: 700;
+  padding: 9px 16px;
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
-.announce-bar a { color: var(--bg); text-decoration: none; }
-.announce-bar a:hover { text-decoration: underline; }
+.announce-bar a { color: var(--paper); text-decoration: none; border-bottom: 1px solid rgba(243,235,221,0.4); }
+.announce-bar a:hover { border-color: var(--paper); }
 
 nav.site-nav {
   position: fixed;
-  top: 38px; left: 0; right: 0;
+  top: 36px; left: 0; right: 0;
   z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 24px;
-  background: linear-gradient(to bottom, rgba(32,36,34,0.92), rgba(32,36,34,0));
+  padding: 16px 24px;
+  background: linear-gradient(to bottom, rgba(18,59,42,0.9), rgba(18,59,42,0));
   backdrop-filter: blur(4px);
   transition: background 0.3s ease;
 }
-/* Solid once scrolled past the hero — toggled in js/main.js — so nav links stay readable over
-   whatever section happens to be underneath, not just the hero. */
 nav.site-nav.scrolled {
   background: var(--charcoal);
+  border-bottom: 1px solid var(--hairline-dark);
   backdrop-filter: none;
 }
 
-nav.site-nav .brand {
-  font-family: 'Anton', sans-serif;
-  font-size: 1.6rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+nav.site-nav .brand { display: flex; align-items: center; gap: 9px; }
+nav.site-nav .brand a { color: var(--paper); text-decoration: none; display: flex; align-items: center; gap: 9px; }
+nav.site-nav .brand-mark {
+  width: 30px; height: 30px;
+  border: 1.4px solid var(--paper);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  font-weight: 500;
+  flex: 0 0 auto;
 }
-nav.site-nav .brand a { color: var(--white); text-decoration: none; }
-nav.site-nav .brand .dot { color: var(--accent); }
+nav.site-nav .brand-word {
+  font-family: 'Fraunces', serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+nav.site-nav .brand .dot { color: var(--accent-deep); }
 
-nav.site-nav .links { display: flex; align-items: center; gap: 28px; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
-nav.site-nav .links a { color: var(--dim); text-decoration: none; }
+nav.site-nav .links { display: flex; align-items: center; gap: 30px; font-size: 0.92rem; font-weight: 500; }
+nav.site-nav .links a { color: var(--graphite-dark); text-decoration: none; }
 nav.site-nav .links a.page-link {
   position: relative;
   padding-bottom: 3px;
 }
-/* Underline grows in from the left on hover, rather than a plain text-decoration flip. */
 nav.site-nav .links a.page-link::after {
   content: '';
   position: absolute;
   left: 0; right: 100%; bottom: 0;
-  height: 1.5px;
+  height: 1px;
   background: currentColor;
   transition: right 0.25s ease;
 }
-nav.site-nav .links a.page-link:hover { color: var(--white); }
+nav.site-nav .links a.page-link:hover { color: var(--paper); }
 nav.site-nav .links a.page-link:hover::after { right: 0; }
-nav.site-nav .links a.page-link.current { color: var(--white); }
-nav.site-nav .links a.page-link.current::after { right: 0; background: var(--accent); }
+nav.site-nav .links a.page-link.current { color: var(--paper); }
+nav.site-nav .links a.page-link.current::after { right: 0; background: var(--accent-deep); }
 
 nav.site-nav .icon-link {
   display: flex;
   align-items: center;
-  color: var(--dim);
+  color: var(--graphite-dark);
   transition: color 0.2s ease;
 }
-nav.site-nav .icon-link:hover { color: var(--accent); }
-nav.site-nav .icon-link svg { width: 20px; height: 20px; display: block; }
+nav.site-nav .icon-link:hover { color: var(--accent-deep); }
+nav.site-nav .icon-link svg { width: 19px; height: 19px; display: block; }
 nav.site-nav .icon-link.strava-badge {
-  font-size: 0.7rem;
-  font-weight: 700;
+  font-size: 0.68rem;
+  font-weight: 600;
   letter-spacing: 0.04em;
   border: 1px solid currentColor;
   border-radius: 999px;
   padding: 5px 10px;
 }
 
-/* Mobile nav — hamburger + slide-in panel. Everything else on this site uses clamp()/vw-relative
-   sizing or CSS Grid auto-fit, which are already responsive without a breakpoint; the nav (a fixed
-   flex row of brand + 4 links + an icon) is the one thing that genuinely needs this treatment,
-   not just a defensive media query for its own sake. */
 .nav-toggle {
   display: none;
   background: none;
   border: none;
-  color: var(--ink);
-  font-size: 1.6rem;
+  color: var(--paper);
+  font-size: 1.5rem;
   line-height: 1;
   cursor: pointer;
   padding: 4px;
 }
 @media (max-width: 760px) {
-  nav.site-nav .brand { font-size: 1.2rem; }
+  nav.site-nav .brand-word { font-size: 1rem; }
   .nav-toggle { display: block; z-index: 201; }
   nav.site-nav .links {
     position: fixed;
@@ -161,7 +195,7 @@ nav.site-nav .icon-link.strava-badge {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    gap: 28px;
+    gap: 26px;
     padding: 110px 32px 32px;
     transition: right 0.3s ease;
     z-index: 200;
@@ -169,265 +203,309 @@ nav.site-nav .icon-link.strava-badge {
   nav.site-nav .links.open { right: 0; }
 }
 
-/* ---------- Buttons ---------- */
+/* ---------- Buttons: pill, flat, no shadow ---------- */
 .btn {
   display: inline-block;
-  padding: 14px 28px;
+  padding: 13px 26px;
   background: var(--accent);
-  /* sky blue is lighter than the orange this replaced — dark text reads far better on it than
-     the light --btn-text did on the old, more saturated orange */
-  color: var(--bg);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  color: var(--charcoal);
+  font-weight: 600;
   font-size: 0.85rem;
-  border-radius: 2px;
+  letter-spacing: 0.01em;
+  border-radius: 999px;
   text-decoration: none;
-  transition: transform 0.15s ease, background 0.15s ease;
+  border: 1px solid var(--accent);
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
-.btn:hover { transform: translateY(-2px); background: #8FC3DE; text-decoration: none; }
+.btn:hover { background: var(--accent-deep); border-color: var(--accent-deep); color: var(--charcoal); text-decoration: none; }
 .btn.ghost {
   background: transparent;
-  color: var(--ink);
-  border: 1.5px solid var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--paper);
 }
-.btn.ghost:hover { border-color: var(--accent); color: var(--accent); background: transparent; }
+.btn.ghost:hover { border-color: var(--accent-deep); color: var(--accent-deep); background: transparent; }
 
-/* ---------- Generic section spacing (used on interior pages) ---------- */
-.page-section { padding: 150px 0 60px; } /* extra top clearance for the announcement bar + nav stacked above */
-.page-section h1 { font-size: clamp(2.2rem, 6vw, 3.2rem); margin-bottom: 24px; }
-.page-section p { color: var(--dim); font-size: 1.05rem; max-width: 640px; }
-.page-section .card {
-  background: var(--bg-raised);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 28px;
-  margin-top: 24px;
+/* ---------- Hexagon divider — small decorative geometry, no meaning beyond a section break ---------- */
+.hex-divider { display: flex; justify-content: center; gap: 14px; margin: 56px 0; }
+.hex-divider .hex {
+  width: 13px; height: 13px;
+  clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0% 50%);
+  background: transparent;
+  border: 1.3px solid var(--graphite-dark);
+  opacity: 0.55;
 }
+
+/* ---------- Generic section spacing (interior pages) ---------- */
+.page-hero { padding: 150px 0 56px; }
+.page-hero h1 { font-size: clamp(2.1rem, 5.4vw, 3.4rem); margin-top: 12px; }
+.page-body { padding: 64px 0 100px; }
+.page-body p { color: var(--graphite); font-size: 1.03rem; max-width: 640px; }
+.page-body .card {
+  background: var(--bone);
+  border: 1px solid var(--vellum);
+  border-radius: 9px;
+  padding: 26px;
+  margin-top: 20px;
+}
+.page-body .card h3 { font-family: 'Fraunces', serif; font-weight: 500; }
 
 footer.site-footer {
-  border-top: 1px solid var(--line);
-  padding: 48px 24px;
-  margin-top: 80px;
+  background: var(--chalk);
+  border-top: 1px solid var(--vellum);
+  padding: 44px 24px;
+  position: relative;
+  overflow: hidden;
 }
 footer.site-footer .wrap {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
   align-items: center;
   justify-content: space-between;
 }
-footer.site-footer .brand { font-family: 'Anton', sans-serif; text-transform: uppercase; letter-spacing: 0.03em; }
-footer.site-footer .meta { color: var(--dim); font-size: 0.85rem; }
-footer.site-footer .socials a { color: var(--dim); margin-left: 16px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em; }
-footer.site-footer .socials a:hover { color: var(--accent); }
-
-/* ---------- Home page: traditional layout, real scroll mechanics ---------- */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 150px 24px 80px; /* extra top clearance for the announcement bar + nav stacked above */
-  position: relative;
-}
-.hero-eyebrow {
-  color: var(--accent);
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-size: 0.7rem;
-  margin-bottom: 14px;
-}
-.hero-title { font-size: clamp(3rem, 10vw, 6.6rem); }
-.hero-title .line { display: block; }
-.hero-title .accent { color: var(--accent); display: inline-block; }
-.hero-sub { color: var(--dim); font-size: clamp(1rem, 2vw, 1.25rem); max-width: 560px; margin: 24px auto 0; }
-.scroll-cue {
+footer.site-footer .brand { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.05rem; }
+footer.site-footer .meta { color: var(--graphite); font-size: 0.85rem; margin-top: 4px; }
+footer.site-footer .socials a { color: var(--graphite); margin-left: 18px; font-size: 0.85rem; }
+footer.site-footer .socials a:hover { color: var(--accent-deep); }
+footer.site-footer .watermark {
   position: absolute;
-  bottom: 36px; left: 50%;
-  transform: translateX(-50%);
-  color: var(--dim);
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  bottom: -46px; right: -40px;
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: clamp(4rem, 13vw, 10rem);
+  letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--vellum);
   white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
 }
 
-.eyebrow {
-  color: var(--accent);
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-size: 0.78rem;
-  margin-bottom: 16px;
-}
-
-.section { padding: 120px 24px; }
-.section .wrap-inner { max-width: var(--max-w); margin: 0 auto; }
-.section h2 { font-size: clamp(2rem, 5vw, 3.2rem); max-width: 780px; }
-.section .lede { color: var(--dim); font-size: 1.1rem; max-width: 620px; margin-top: 20px; }
-.reveal { opacity: 0; }
-
-/* Horizontal-scroll gallery — pins the section while the track slides sideways as you scroll down.
-   Placeholder cards until real club/ride photos exist (see website/setup.md) — swap the .gallery-card
-   contents for <img> tags then, the scroll mechanic itself doesn't need to change. */
-.gallery-pin {
+/* ---------- Home page opening: pinned scroll-through scene ----------
+   2026-09-02, second pass: rebuilt as ONE TALL vertical illustration (not a wide horizontal
+   panorama) with a STAGED reveal, per Ray's steer — "based on the structured one you gave me
+   earlier" (i.e. this build), but: text disappears, THEN the image shifts to the next chapter,
+   THEN the new text appears — three sequential beats, not a continuous crossfade. Journey reads
+   top to bottom as you scroll: open sky -> the skyline ridge meets green mountains -> down onto
+   the roads (Old La Honda, then West Alpine Road). Driven by a single scrubbed GSAP timeline in
+   buildSceneScroll() (js/main.js) — .scene-track is 300vh tall and translates upward in two steps
+   while .scene-label groups fade out/in between each hold. Original hand-coded SVG line art, not a
+   photo — see website/setup.md item 11 for why. */
+.scene-pin {
   height: 100vh;
   overflow: hidden;
   position: relative;
-  display: flex;
-  align-items: center;
-  background: var(--bg-raised);
+  background: var(--ink);
+  color: var(--paper);
 }
-.gallery-heading {
+.scene-track {
   position: absolute;
-  top: 64px; left: 24px;
-  z-index: 2;
-}
-.gallery-track {
-  display: flex;
-  gap: 24px;
-  padding: 0 24px;
+  top: 0; left: 0;
+  width: 100%;
+  height: 300vh;
   will-change: transform;
 }
-.gallery-card {
-  flex: 0 0 auto;
-  width: min(70vw, 420px);
-  aspect-ratio: 4 / 5;
-  border-radius: 8px;
-  background: var(--bg);
-  border: 1px solid var(--line);
+.scene-track svg { display: block; width: 100%; height: 100%; }
+.scene-strava-badge {
+  position: absolute;
+  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 24px;
-}
-.gallery-card .label {
-  color: var(--dim);
+  gap: 6px;
+  background: var(--charcoal);
+  border: 1px solid var(--hairline-dark);
+  color: var(--paper);
+  font-size: 0.62rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  padding: 6px 11px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.scene-strava-badge .check { color: var(--accent-deep); }
+
+.scene-labels { position: absolute; inset: 0; pointer-events: none; display: flex; align-items: flex-start; justify-content: center; padding-top: 24vh; }
+.scene-label {
+  position: absolute;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0 24px;
 }
 
+/* Floating notched card — holds each scene's copy + a scroll-progress readout. Reference: a small
+   dark card centered over a full-bleed illustration, text swapping as the background scene changes
+   underneath it (styles.refero.design/style/34baa524-5d5b-4165-bbab-d01f05e6d6b9). */
+.scene-card {
+  width: min(88vw, 440px);
+  background: var(--charcoal);
+  border: 1px solid var(--hairline-dark);
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  padding: 26px 28px 22px;
+  text-align: left;
+}
+.scene-card .hero-eyebrow {
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.66rem;
+  margin-bottom: 10px;
+}
+.scene-card h2 {
+  font-size: clamp(1.5rem, 3.4vw, 2.15rem);
+  line-height: 1.08;
+  color: var(--paper);
+}
+.scene-card h2 em { color: var(--accent-deep); font-style: italic; }
+.scene-card p {
+  color: var(--graphite-dark);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin-top: 12px;
+}
+.scene-card .scroll-row {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--graphite-dark);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+.scene-card .scroll-row .bar { width: 36px; height: 2px; background: var(--vellum); position: relative; overflow: hidden; }
+.scene-card .scroll-row .bar::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: var(--scroll-progress, 0%);
+  background: var(--accent-deep);
+}
+
+.eyebrow {
+  color: var(--accent-deep);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.76rem;
+  margin-bottom: 14px;
+}
+
+.section { padding: 110px 24px; }
+.section .wrap-inner { max-width: var(--max-w); margin: 0 auto; }
+.section h2 { font-size: clamp(1.9rem, 4.6vw, 3rem); max-width: 780px; }
+.section .lede { color: var(--graphite); font-size: 1.08rem; max-width: 620px; margin-top: 18px; }
+.reveal { opacity: 0; }
+
 /* Rides */
-.rides-list { margin-top: 48px; display: flex; flex-direction: column; gap: 1px; background: var(--line); max-width: var(--max-w); margin-left: auto; margin-right: auto; }
-.ride-row { background: var(--bg); display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px; padding: 28px; }
-.ride-row .day { font-family: 'Anton', sans-serif; font-size: 1.5rem; text-transform: uppercase; }
-.ride-row .detail { color: var(--dim); font-size: 0.95rem; }
+.rides-list { margin-top: 44px; display: flex; flex-direction: column; gap: 1px; background: var(--vellum); max-width: var(--max-w); margin-left: auto; margin-right: auto; }
+.ride-row { background: var(--chalk); display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px; padding: 26px; }
+.ride-row .day { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.5rem; }
+.ride-row .detail { color: var(--graphite); font-size: 0.94rem; }
 .ride-row .tag {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--accent);
-  border: 1px solid var(--accent);
+  font-weight: 600;
+  color: var(--accent-deep);
+  border: 1px solid var(--accent-deep);
   border-radius: 999px;
   padding: 4px 12px;
 }
 
 /* Leadership — officers only, deliberately (see decisions-log.md, minors-privacy consideration).
-   Photo-card style, placeholder-photo box until real photos exist — swap the .leader-photo div
-   for a real <img> then, nothing else about the layout needs to change. */
+   Circular vignette treatment — initials placeholder until real photos exist (website/setup.md
+   item 11); swap the .leader-photo div for a real cropped <img> then, nothing else needs to change. */
 .leadership-grid {
   margin-top: 48px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
   max-width: var(--max-w);
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
 }
-.leader-card {
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  overflow: hidden;
-  text-align: left;
-}
+.leader-card { text-align: center; }
 .leader-photo {
-  aspect-ratio: 4 / 3;
-  background: var(--bg-raised);
+  width: 132px; height: 132px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: var(--bone);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Anton', sans-serif;
-  font-size: 2.2rem;
-  color: var(--accent);
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 2rem;
+  color: var(--accent-deep);
 }
-.leader-info { padding: 16px 18px 20px; }
-.leader-name { font-family: 'Anton', sans-serif; text-transform: uppercase; font-size: 1.1rem; }
-.leader-tags { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+.leader-info { padding: 16px 8px 0; }
+.leader-name { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.12rem; }
+.leader-tags { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
 .leader-tags span {
   font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--dim);
-  border: 1px solid var(--line);
+  color: var(--graphite);
+  border: 1px solid var(--vellum);
   border-radius: 999px;
   padding: 3px 10px;
 }
-.leader-tags span.role { color: var(--accent); border-color: var(--accent); }
+.leader-tags span.role { color: var(--accent-deep); border-color: var(--accent-deep); }
 
-.member-count { margin-top: 64px; text-align: center; }
-.member-count .num { font-family: 'Anton', sans-serif; font-size: clamp(2.5rem, 6vw, 4rem); color: var(--accent); line-height: 1; }
-.member-count .label { color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.85rem; margin-top: 8px; }
+.member-count { margin-top: 56px; text-align: center; }
+.member-count .num { font-family: 'Fraunces', serif; font-weight: 500; font-size: clamp(2.4rem, 5.6vw, 3.6rem); color: var(--accent-deep); line-height: 1; }
+.member-count .label { color: var(--graphite); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.82rem; margin-top: 8px; }
 
-/* Story section — alternating text/photo blocks, inspired by a reference site's "the beginning"
-   pattern but our own copy/palette. Placeholder photo box until real photos exist. */
+/* Story section — alternating text/photo blocks. Flat placeholder photo panel (no radius,
+   no border) until real photos exist. */
 .story-block {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 56px;
+  gap: 52px;
   align-items: center;
   max-width: var(--max-w);
-  margin: 64px auto 0;
+  margin: 60px auto 0;
 }
 .story-block.reverse { direction: rtl; }
 .story-block.reverse > * { direction: ltr; }
 .story-photo {
   aspect-ratio: 4 / 3;
-  background: var(--bg-raised);
-  border: 1px solid var(--line);
-  border-radius: 6px;
+  background: var(--ash);
+  background-image:
+    linear-gradient(var(--vellum) 1px, transparent 1px),
+    linear-gradient(90deg, var(--vellum) 1px, transparent 1px);
+  background-size: 24px 24px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--dim);
+  align-items: flex-end;
+  padding: 16px;
+}
+.story-photo span {
+  background: var(--charcoal);
+  color: var(--paper);
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  font-size: 0.85rem;
-  text-align: center;
-  padding: 24px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 7px 11px;
+  line-height: 1.4;
 }
-.story-block .pull { font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.1; }
+.story-block .pull { font-size: clamp(1.7rem, 3.8vw, 2.6rem); line-height: 1.08; }
 @media (max-width: 800px) {
   .story-block, .story-block.reverse { grid-template-columns: 1fr; direction: ltr; }
 }
 
 /* Instagram callout */
-.insta-section { padding: 100px 24px; text-align: center; }
-.insta-handle { font-family: 'Anton', sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem); text-transform: none; }
-.insta-handle .at { color: var(--accent); }
+.insta-section { padding: 96px 24px; text-align: center; }
+.insta-handle { font-family: 'Fraunces', serif; font-weight: 500; font-size: clamp(1.8rem, 4vw, 2.5rem); }
+.insta-handle .at { color: var(--accent-deep); }
 
-/* Footer watermark — large faint rotated text behind the footer content, pure CSS, no imagery. */
-footer.site-footer { position: relative; overflow: hidden; }
-footer.site-footer .watermark {
-  position: absolute;
-  bottom: -40px; right: -60px;
-  font-family: 'Anton', sans-serif;
-  font-size: clamp(4rem, 14vw, 11rem);
-  color: var(--line);
-  opacity: 0.35;
-  white-space: nowrap;
-  pointer-events: none;
-  z-index: 0;
-}
-footer.site-footer .wrap { position: relative; z-index: 1; }
-
-.join-section { background: var(--charcoal); padding: 120px 24px; text-align: center; }
-.join-section h2 { color: var(--ink); }
-.join-section .lede { color: var(--dim); margin: 20px auto 0; }
-.join-section .btn-row { margin-top: 36px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.join-section { padding: 110px 24px; text-align: center; }
+.join-section .lede { margin: 18px auto 0; }
+.join-section .btn-row { margin-top: 34px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }

@@ -77,7 +77,7 @@
 </div>
 
 <nav class="site-nav" id="siteNav">
-  <div class="brand"><a href="index.html">Skyline Velo<span class="dot">.</span>CC</a></div>
+  <div class="brand"><a href="index.html"><span class="brand-mark">S</span><span class="brand-word">Skyline Velo<span class="dot">.</span>CC</span></a></div>
   <div class="links" id="navLinks">
     <a class="page-link" href="events.html">Events</a>
     <a class="page-link" href="roster.html">Roster</a>
@@ -95,35 +95,138 @@
   <button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-eyebrow">SF Peninsula &middot; 18 &amp; Under &middot; Free</div>
-  <h1 class="hero-title">
-    <span class="line">SKYLINE VELO</span>
-    <span class="line accent">CYCLING CLUB</span>
-  </h1>
-  <p class="hero-sub">A junior cycling club built around the Bay Area's toughest local climbs — group rides, segment rivalries, and open recruitment.</p>
-  <div class="scroll-cue">Scroll ↓</div>
-</section>
+<!-- OPENING SCENE: pinned scroll-through journey, one continuous tall illustration read top to
+     bottom — open sky, down to where the skyline ridge meets the green mountains, down onto the
+     roads (Old La Honda, then West Alpine Road). A floating card holds each scene's copy; the
+     sequence per scene change is: card text fades out -> illustration shifts up to the next
+     chapter -> new card text fades in (buildSceneScroll() in js/main.js runs this as one scrubbed
+     GSAP timeline). Original hand-coded SVG line art, not a photo — see the note in css/style.css
+     above .scene-pin for why. -->
+<section class="scene-pin" id="scenePin">
+  <div class="scene-track" id="sceneTrack">
+    <svg viewBox="0 0 1440 4320" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3f7d9c" />
+          <stop offset="58%" stop-color="#6FA9C9" />
+          <stop offset="100%" stop-color="#dcedf2" />
+        </linearGradient>
+        <linearGradient id="oceanGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#8fc3de" />
+          <stop offset="100%" stop-color="#4f8fac" />
+        </linearGradient>
+        <linearGradient id="grassGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#9CAA6E" />
+          <stop offset="100%" stop-color="#788F52" />
+        </linearGradient>
+        <symbol id="treeA" viewBox="0 0 60 66">
+          <ellipse cx="30" cy="34" rx="26" ry="24" fill="#0D2E20" />
+          <ellipse cx="17" cy="27" rx="16" ry="15" fill="#1B4A34" />
+          <ellipse cx="43" cy="29" rx="15" ry="14" fill="#123B2A" />
+        </symbol>
+        <symbol id="treeB" viewBox="0 0 60 66">
+          <ellipse cx="30" cy="36" rx="22" ry="26" fill="#123B2A" />
+          <ellipse cx="30" cy="18" rx="14" ry="16" fill="#1B4A34" />
+        </symbol>
+      </defs>
 
-<!-- HORIZONTAL-SCROLL GALLERY -->
-<!-- Pins the section while the track slides sideways as you scroll down. Placeholder cards until real
-     club/ride photos exist (website/setup.md) — swap for <img> tags, the scroll mechanic stays the same. -->
-<section class="gallery-pin" id="galleryPin">
-  <div class="gallery-heading">
-    <div class="eyebrow">On The Road</div>
+      <!-- ===== SCENE 1: SKYLINE — looking down at the coastal range, ocean beyond, big open sky ===== -->
+      <rect x="0" y="0" width="1440" height="900" fill="url(#skyGrad)" />
+      <g fill="#F3EBDD">
+        <g opacity="0.75"><ellipse cx="220" cy="180" rx="90" ry="30" /><ellipse cx="300" cy="165" rx="68" ry="26" /><ellipse cx="150" cy="205" rx="58" ry="22" /></g>
+        <g opacity="0.7"><ellipse cx="1000" cy="120" rx="100" ry="32" /><ellipse cx="1090" cy="106" rx="74" ry="26" /><ellipse cx="910" cy="145" rx="58" ry="20" /></g>
+        <g opacity="0.5"><ellipse cx="620" cy="300" rx="80" ry="24" /><ellipse cx="700" cy="288" rx="55" ry="18" /></g>
+        <g opacity="0.4"><ellipse cx="1260" cy="430" rx="68" ry="22" /><ellipse cx="120" cy="490" rx="64" ry="20" /></g>
+      </g>
+      <!-- a sliver of ocean on the horizon -->
+      <rect x="0" y="820" width="1440" height="90" fill="url(#oceanGrad)" />
+      <g stroke="#F3EBDD" stroke-width="2" opacity="0.3">
+        <line x1="60" y1="850" x2="220" y2="850" /><line x1="480" y1="864" x2="640" y2="864" />
+        <line x1="900" y1="846" x2="1080" y2="846" /><line x1="1180" y1="872" x2="1340" y2="872" />
+      </g>
+      <!-- coastal ridgelines, layered for depth, descending from the overlook into the trees below -->
+      <polygon fill="#7FA593" opacity="0.55" points="0,910 0,860 180,842 360,866 540,836 720,860 900,830 1080,858 1260,833 1440,856 1440,910" />
+      <polygon fill="#4C7A63" opacity="0.85" points="0,940 0,880 160,850 340,890 520,846 700,886 880,840 1060,880 1240,848 1440,878 1440,940" />
+      <polygon fill="#123B2A" points="0,1440 0,940 150,860 300,930 450,830 600,900 750,800 900,880 1050,820 1200,900 1350,840 1440,900 1440,1440" />
+
+      <!-- ===== SCENE 2: OLD LA HONDA — the climb, trees lining the road ===== -->
+      <rect x="0" y="1440" width="1440" height="1440" fill="#123B2A" />
+      <path d="M 720,1440 L 660,1650 L 780,1850 L 650,2050 L 760,2280 L 700,2500 L 640,2700 L 720,2880" fill="none" stroke="#A79C86" stroke-width="72" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M 720,1440 L 660,1650 L 780,1850 L 650,2050 L 760,2280 L 700,2500 L 640,2700 L 720,2880" fill="none" stroke="#F3EBDD" stroke-width="5" stroke-dasharray="4 20" stroke-linecap="round" />
+      <g opacity="0.95">
+        <use href="#treeA" x="60" y="1490" width="66" height="72" />
+        <use href="#treeB" x="1310" y="1470" width="60" height="66" />
+        <use href="#treeB" x="120" y="1640" width="56" height="62" />
+        <use href="#treeA" x="1260" y="1660" width="70" height="76" />
+        <use href="#treeA" x="40" y="1820" width="60" height="66" />
+        <use href="#treeB" x="1320" y="1840" width="64" height="70" />
+        <use href="#treeB" x="90" y="2010" width="58" height="64" />
+        <use href="#treeA" x="1280" y="2020" width="66" height="72" />
+        <use href="#treeA" x="50" y="2210" width="62" height="68" />
+        <use href="#treeB" x="1300" y="2200" width="60" height="66" />
+        <use href="#treeB" x="110" y="2420" width="56" height="62" />
+        <use href="#treeA" x="1270" y="2430" width="68" height="74" />
+        <use href="#treeA" x="40" y="2630" width="60" height="66" />
+        <use href="#treeB" x="1310" y="2620" width="62" height="68" />
+        <use href="#treeB" x="100" y="2800" width="58" height="64" />
+        <use href="#treeA" x="1290" y="2790" width="64" height="70" />
+      </g>
+      <circle cx="700" cy="1950" r="16" fill="#F3EBDD" stroke="#202422" stroke-width="4" />
+
+      <!-- ===== SCENE 3: WEST ALPINE ROAD — over the ridge, open ground ===== -->
+      <rect x="0" y="2880" width="1440" height="1440" fill="url(#grassGrad)" />
+      <polygon fill="#6FA9C9" opacity="0.3" points="0,2985 0,2945 200,2905 420,2952 640,2892 860,2942 1080,2900 1300,2946 1440,2912 1440,2985" />
+      <path d="M 720,2880 L 660,3080 L 760,3280 L 680,3480 L 700,3600 L 660,3800 L 720,4000 L 700,4200" fill="none" stroke="#A79C86" stroke-width="66" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M 720,2880 L 660,3080 L 760,3280 L 680,3480 L 700,3600 L 660,3800 L 720,4000 L 700,4200" fill="none" stroke="#F3EBDD" stroke-width="5" stroke-dasharray="4 20" stroke-linecap="round" />
+      <g opacity="0.9">
+        <use href="#treeA" x="80" y="2980" width="54" height="60" />
+        <use href="#treeB" x="1300" y="3040" width="52" height="58" />
+        <use href="#treeB" x="140" y="3340" width="50" height="56" />
+        <use href="#treeA" x="1260" y="3420" width="56" height="62" />
+        <use href="#treeA" x="90" y="3720" width="52" height="58" />
+        <use href="#treeB" x="1290" y="3780" width="50" height="56" />
+        <use href="#treeB" x="150" y="4080" width="48" height="54" />
+        <use href="#treeA" x="1270" y="4100" width="54" height="60" />
+      </g>
+      <circle cx="700" cy="3600" r="16" fill="#F3EBDD" stroke="#202422" stroke-width="4" />
+    </svg>
+
+    <!-- Strava badge, positioned in-world near the Old La Honda marker so it pans with the
+         illustration. Text badge, not the actual Strava logo mark — trademark reasoning is the
+         same as the nav's Strava badge (see website/setup.md). -->
+    <div class="scene-strava-badge" style="top: 45.1%; left: 60%;"><span class="check">&#10003;</span> Strava Segment &middot; Verified</div>
   </div>
-  <div class="gallery-track" id="galleryTrack">
-    <div class="gallery-card"><div class="label">Photo coming soon<br>Old La Honda climb</div></div>
-    <div class="gallery-card"><div class="label">Photo coming soon<br>Saturday long ride</div></div>
-    <div class="gallery-card"><div class="label">Photo coming soon<br>Wednesday evening ride</div></div>
-    <div class="gallery-card"><div class="label">Photo coming soon<br>The group at Skyline Blvd</div></div>
-    <div class="gallery-card"><div class="label">Photo coming soon<br>Segment leaderboard night</div></div>
+
+  <div class="scene-labels">
+    <div class="scene-label" id="sceneLabel0">
+      <div class="scene-card">
+        <div class="hero-eyebrow">SF Peninsula &middot; 18 &amp; Under &middot; Free</div>
+        <h2>Skyline Velo <em>Cycling Club</em></h2>
+        <p>A junior cycling club built around the Bay Area's toughest local climbs — group rides, segment rivalries, and open recruitment.</p>
+        <div class="scroll-row"><span>Scroll</span><span class="bar"></span></div>
+      </div>
+    </div>
+    <div class="scene-label" id="sceneLabel1">
+      <div class="scene-card">
+        <div class="hero-eyebrow">Wednesday &middot; Anchor Ride</div>
+        <h2><em>Old</em> La Honda</h2>
+        <p>Where the rivalry started — a short, brutal climb in Woodside that's basically the club's home turf.</p>
+        <div class="scroll-row"><span>Scroll</span><span class="bar" id="sceneProgressBar1"></span></div>
+      </div>
+    </div>
+    <div class="scene-label" id="sceneLabel2">
+      <div class="scene-card">
+        <div class="hero-eyebrow">Saturday &middot; Long Ride</div>
+        <h2>West <em>Alpine</em> Road</h2>
+        <p>The weekend route climbs over the ridge into open, quiet road — the long ride the whole week points toward.</p>
+        <div class="scroll-row"><span>Scroll</span><span class="bar" id="sceneProgressBar2"></span></div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- INSTAGRAM -->
-<section class="insta-section reveal">
+<section class="insta-section section-dark reveal">
   <div class="wrap-inner">
     <div class="insta-handle"><span class="at">@</span>skylinevelo.cc</div>
     <p class="lede" style="margin: 12px auto 0;">Follow along for ride updates, event announcements, and photos from the road.</p>
@@ -135,8 +238,9 @@
 </section>
 
 <!-- JOIN -->
-<section class="join-section reveal">
+<section class="join-section section-light reveal">
   <div class="wrap-inner">
+    <div class="hex-divider"><span class="hex"></span><span class="hex"></span><span class="hex"></span></div>
     <div class="eyebrow">No Cost. No Catch.</div>
     <h2>Open recruitment. Every rider welcome.</h2>
     <p class="lede">18 and under, any ability level, completely free — no membership fee, no dues. As the club grows, custom kits, local sponsorships, and a real racing division are all things we're building toward — not promises, just where this could go.</p>
