@@ -20,7 +20,7 @@
     <a class="page-link" href="roster.html">Roster</a>
     <a class="page-link" href="about.html">About</a>
     <a class="page-link" href="contact.html">Contact</a>
-    <a class="icon-link" href="#" target="_blank" rel="noopener" aria-label="Instagram">
+    <a class="icon-link" href="https://www.instagram.com/skylinevelo.cc/" target="_blank" rel="noopener" aria-label="Instagram">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="3" y="3" width="18" height="18" rx="5"/>
         <circle cx="12" cy="12" r="4"/>
@@ -42,20 +42,53 @@
   <div class="wrap">
     <p>A short weekday ride and a longer weekend one — designed to actually fit a school schedule, not fight it.</p>
 
-    <div class="rides-list" style="margin-left: 0; margin-right: 0;">
-      <div class="ride-row">
-        <div>
-          <div class="day">Wednesday</div>
-          <div class="detail">Evening &middot; short &middot; meeting point TBA</div>
+    <!-- Route cards — our own version of a "weekly ride" map card: illustrated route on one side,
+         a deeper description on the other. Destinations are real (rides/schedule.md, confirmed
+         2026-09-02); time and exact meeting point are still TBD, shown honestly as TBA rather than
+         inventing them — same for distance, left off entirely since it isn't set yet. -->
+    <div class="route-card" style="margin-top: 44px;">
+      <div class="route-map">
+        <div class="route-badge">Anchor Ride</div>
+        <svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <polygon fill="#0D2E20" points="0,260 0,190 60,160 120,185 180,140 240,170 300,120 360,155 400,130 400,260" />
+          <polygon fill="#123B2A" points="0,260 0,220 80,205 160,225 240,190 320,215 400,195 400,260" />
+          <path d="M 40,225 L 100,200 L 160,170 L 220,130 L 278,92" fill="none" stroke="#F3EBDD" stroke-width="3" stroke-dasharray="3 10" stroke-linecap="round" />
+          <circle cx="40" cy="225" r="6" fill="#F3EBDD" stroke="#202422" stroke-width="2" />
+          <circle cx="278" cy="92" r="8" fill="#F3EBDD" stroke="#202422" stroke-width="2" />
+          <text x="290" y="88" fill="#F3EBDD" font-family="Inter, sans-serif" font-size="13" font-weight="600">Old La Honda</text>
+        </svg>
+        <div class="route-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg> Every Wednesday &middot; evening &middot; time TBA</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z" /><circle cx="12" cy="9" r="2.5" /></svg> Meeting point TBA, Woodside</span>
         </div>
-        <div class="tag">Anchor Ride</div>
       </div>
-      <div class="ride-row">
-        <div>
-          <div class="day">Saturday</div>
-          <div class="detail">Long ride &middot; meeting point TBA</div>
+      <div class="route-desc">
+        <h3>Old La Honda</h3>
+        <p>The club's original ride — before there was a club, there was a group chat ranking each other on this exact Strava segment. A short, steep climb that's become the anchor of the whole week: show up, chase the segment, go home. Evening slot, built to fit around school.</p>
+        <div class="tag-row"><span>Wednesday</span><span>Short &amp; Steep</span></div>
+      </div>
+    </div>
+
+    <div class="route-card reverse">
+      <div class="route-map">
+        <div class="route-badge">Long Ride</div>
+        <svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect x="0" y="0" width="400" height="260" fill="#123B2A" />
+          <polygon fill="#788F52" opacity="0.5" points="0,260 0,210 90,190 180,215 270,180 360,205 400,190 400,260" />
+          <path d="M 40,225 L 110,192 L 172,210 L 232,158 L 300,128 L 348,96" fill="none" stroke="#F3EBDD" stroke-width="3" stroke-dasharray="3 10" stroke-linecap="round" />
+          <circle cx="40" cy="225" r="6" fill="#F3EBDD" stroke="#202422" stroke-width="2" />
+          <circle cx="348" cy="96" r="8" fill="#F3EBDD" stroke="#202422" stroke-width="2" />
+          <text x="196" y="50" fill="#F3EBDD" font-family="Inter, sans-serif" font-size="13" font-weight="600" text-anchor="middle">West Alpine Road</text>
+        </svg>
+        <div class="route-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg> Every Saturday &middot; time TBA</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z" /><circle cx="12" cy="9" r="2.5" /></svg> Meeting point TBA</span>
         </div>
-        <div class="tag">Long Ride</div>
+      </div>
+      <div class="route-desc">
+        <h3>West Alpine Road</h3>
+        <p>The weekend's longer ride climbs out past the ridge and onto West Alpine Road — quieter, more open, less about chasing a single segment and more about putting in real miles together. It's the ride the rest of the week points toward.</p>
+        <div class="tag-row"><span>Saturday</span><span>Open &amp; Long</span></div>
       </div>
     </div>
 
@@ -78,7 +111,7 @@
       <div class="meta">Menlo Park &amp; the SF Peninsula &middot; Founded 2026</div>
     </div>
     <div class="socials">
-      <a href="#">Instagram</a>
+      <a href="https://www.instagram.com/skylinevelo.cc/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.strava.com/clubs/skylinevelo" target="_blank" rel="noopener">Strava</a>
     </div>
   </div>

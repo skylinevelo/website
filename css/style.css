@@ -86,16 +86,20 @@ a:hover { text-decoration: underline; }
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 101;
-  background: var(--charcoal);
-  color: var(--paper);
+  /* Cream, semi-transparent + blur — distinct from nav.site-nav.scrolled's solid charcoal so the
+     two stacked bars don't read as one flat block, per Ray's call (2026-09-02). */
+  background: rgba(243, 235, 221, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--charcoal);
   text-align: center;
   padding: 9px 16px;
   font-size: 0.76rem;
   font-weight: 500;
   letter-spacing: 0.02em;
 }
-.announce-bar a { color: var(--paper); text-decoration: none; border-bottom: 1px solid rgba(243,235,221,0.4); }
-.announce-bar a:hover { border-color: var(--paper); }
+.announce-bar a { color: var(--charcoal); text-decoration: none; border-bottom: 1px solid rgba(32,36,34,0.4); }
+.announce-bar a:hover { border-color: var(--charcoal); }
 
 nav.site-nav {
   position: fixed;
@@ -105,8 +109,11 @@ nav.site-nav {
   align-items: center;
   justify-content: space-between;
   padding: 16px 24px;
-  background: linear-gradient(to bottom, rgba(18,59,42,0.9), rgba(18,59,42,0));
-  backdrop-filter: blur(4px);
+  /* No green-tinted gradient — fully transparent over the scene until scrolled, so it doesn't
+     haze the illustration underneath. Text keeps a soft shadow instead, for legibility against
+     whatever's behind it (sky, mountains, etc.) without needing a background tint. */
+  background: transparent;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.35);
   transition: background 0.3s ease;
 }
 nav.site-nav.scrolled {
@@ -308,24 +315,37 @@ footer.site-footer .watermark {
   will-change: transform;
 }
 .scene-track svg { display: block; width: 100%; height: 100%; }
-.scene-strava-badge {
+
+/* Crest-flip transition overlay — see the HTML comment above #crestFlip for what this does. */
+.crest-flip {
   position: absolute;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  z-index: 5;
   display: flex;
   align-items: center;
-  gap: 6px;
-  background: var(--charcoal);
-  border: 1px solid var(--hairline-dark);
-  color: var(--paper);
-  font-size: 0.62rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 6px 11px;
-  border-radius: 999px;
-  white-space: nowrap;
+  justify-content: center;
+  perspective: 1600px;
+  opacity: 0;
+  pointer-events: none;
 }
-.scene-strava-badge .check { color: var(--accent-deep); }
+.crest-flip-inner {
+  position: relative;
+  width: min(64vw, 440px);
+  aspect-ratio: 1;
+  transform-style: preserve-3d;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+}
+.crest-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.crest-face svg { display: block; width: 100%; height: 100%; }
+.crest-face.crest-front { transform: rotateY(0deg); }
+.crest-face.crest-back { transform: rotateY(180deg); }
 
 .scene-labels { position: absolute; inset: 0; pointer-events: none; display: flex; align-items: flex-start; justify-content: center; padding-top: 24vh; }
 .scene-label {
@@ -336,6 +356,8 @@ footer.site-footer .watermark {
   width: 100%;
   padding: 0 24px;
 }
+/* Old La Honda's card sits to the left of the road, not centered over it. */
+.scene-label.scene-label-left { justify-content: flex-start; padding-left: max(24px, 8vw); }
 
 /* Floating notched card — holds each scene's copy + a scroll-progress readout. Reference: a small
    dark card centered over a full-bleed illustration, text swapping as the background scene changes
@@ -402,12 +424,65 @@ footer.site-footer .watermark {
 .section .lede { color: var(--graphite); font-size: 1.08rem; max-width: 620px; margin-top: 18px; }
 .reveal { opacity: 0; }
 
-/* Rides */
-.rides-list { margin-top: 44px; display: flex; flex-direction: column; gap: 1px; background: var(--vellum); max-width: var(--max-w); margin-left: auto; margin-right: auto; }
-.ride-row { background: var(--chalk); display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px; padding: 26px; }
-.ride-row .day { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.5rem; }
-.ride-row .detail { color: var(--graphite); font-size: 0.94rem; }
-.ride-row .tag {
+/* Rides — route card per ride: our own version of the "weekly ride" map-card pattern
+   (map/meta on one side, a deeper description on the other), inspired by thursdays.cc's events
+   page. Route line is illustration, not a real map — same reasoning as the home page scene (no
+   fabricated distances/mileage either: rides/schedule.md has the real destinations confirmed but
+   time and exact meeting point are still TBD, so this shows what's real and marks the rest TBA
+   rather than inventing numbers). */
+.route-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  max-width: var(--max-w);
+  margin: 0 auto 28px;
+  background: var(--bone);
+  border: 1px solid var(--vellum);
+  border-radius: 9px;
+  overflow: hidden;
+}
+.route-card.reverse { grid-template-columns: 1fr 1fr; }
+.route-card.reverse .route-map { order: 2; }
+.route-card.reverse .route-desc { order: 1; }
+.route-map {
+  position: relative;
+  background: var(--ink);
+  min-height: 280px;
+  overflow: hidden;
+}
+.route-map svg { display: block; width: 100%; height: 100%; }
+.route-badge {
+  position: absolute;
+  top: 18px; left: 18px;
+  z-index: 2;
+  border: 1px solid var(--accent-deep);
+  color: var(--accent);
+  font-size: 0.66rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(18,59,42,0.7);
+  backdrop-filter: blur(3px);
+}
+.route-meta {
+  position: absolute;
+  left: 18px; right: 18px; bottom: 18px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--paper);
+  font-size: 0.8rem;
+}
+.route-meta span { display: flex; align-items: center; gap: 7px; }
+.route-meta svg { width: 14px; height: 14px; flex: 0 0 auto; color: var(--accent-deep); }
+.route-desc { padding: 32px; display: flex; flex-direction: column; justify-content: center; }
+.route-desc h3 { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.5rem; }
+.route-desc p { color: var(--graphite); font-size: 0.96rem; margin-top: 14px; line-height: 1.55; }
+.route-desc .tag-row { margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap; }
+.route-desc .tag-row span {
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -416,6 +491,11 @@ footer.site-footer .watermark {
   border: 1px solid var(--accent-deep);
   border-radius: 999px;
   padding: 4px 12px;
+}
+@media (max-width: 760px) {
+  .route-card, .route-card.reverse { grid-template-columns: 1fr; }
+  .route-card.reverse .route-map, .route-card.reverse .route-desc { order: initial; }
+  .route-map { min-height: 220px; }
 }
 
 /* Leadership — officers only, deliberately (see decisions-log.md, minors-privacy consideration).

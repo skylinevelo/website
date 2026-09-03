@@ -83,8 +83,7 @@
     <a class="page-link" href="roster.html">Roster</a>
     <a class="page-link" href="about.html">About</a>
     <a class="page-link" href="contact.html">Contact</a>
-    <!-- TODO: replace with the real link once the Instagram account exists (website/setup.md) -->
-    <a class="icon-link" href="#" target="_blank" rel="noopener" aria-label="Instagram">
+    <a class="icon-link" href="https://www.instagram.com/skylinevelo.cc/" target="_blank" rel="noopener" aria-label="Instagram">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="3" y="3" width="18" height="18" rx="5"/>
         <circle cx="12" cy="12" r="4"/>
@@ -132,12 +131,6 @@
 
       <!-- ===== SCENE 1: SKYLINE — looking down at the coastal range, ocean beyond, big open sky ===== -->
       <rect x="0" y="0" width="1440" height="900" fill="url(#skyGrad)" />
-      <g fill="#F3EBDD">
-        <g opacity="0.75"><ellipse cx="220" cy="180" rx="90" ry="30" /><ellipse cx="300" cy="165" rx="68" ry="26" /><ellipse cx="150" cy="205" rx="58" ry="22" /></g>
-        <g opacity="0.7"><ellipse cx="1000" cy="120" rx="100" ry="32" /><ellipse cx="1090" cy="106" rx="74" ry="26" /><ellipse cx="910" cy="145" rx="58" ry="20" /></g>
-        <g opacity="0.5"><ellipse cx="620" cy="300" rx="80" ry="24" /><ellipse cx="700" cy="288" rx="55" ry="18" /></g>
-        <g opacity="0.4"><ellipse cx="1260" cy="430" rx="68" ry="22" /><ellipse cx="120" cy="490" rx="64" ry="20" /></g>
-      </g>
       <!-- a sliver of ocean on the horizon -->
       <rect x="0" y="820" width="1440" height="90" fill="url(#oceanGrad)" />
       <g stroke="#F3EBDD" stroke-width="2" opacity="0.3">
@@ -151,8 +144,8 @@
 
       <!-- ===== SCENE 2: OLD LA HONDA — the climb, trees lining the road ===== -->
       <rect x="0" y="1440" width="1440" height="1440" fill="#123B2A" />
-      <path d="M 720,1440 L 660,1650 L 780,1850 L 650,2050 L 760,2280 L 700,2500 L 640,2700 L 720,2880" fill="none" stroke="#A79C86" stroke-width="72" stroke-linecap="round" stroke-linejoin="round" />
-      <path d="M 720,1440 L 660,1650 L 780,1850 L 650,2050 L 760,2280 L 700,2500 L 640,2700 L 720,2880" fill="none" stroke="#F3EBDD" stroke-width="5" stroke-dasharray="4 20" stroke-linecap="round" />
+      <path d="M 720,1440 Q 660,1650 720,1750 Q 780,1850 715,1950 Q 650,2050 705,2165 Q 760,2280 730,2390 Q 700,2500 670,2600 Q 640,2700 720,2880" fill="none" stroke="#A79C86" stroke-width="72" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M 720,1440 Q 660,1650 720,1750 Q 780,1850 715,1950 Q 650,2050 705,2165 Q 760,2280 730,2390 Q 700,2500 670,2600 Q 640,2700 720,2880" fill="none" stroke="#F3EBDD" stroke-width="5" stroke-dasharray="4 20" stroke-linecap="round" />
       <g opacity="0.95">
         <use href="#treeA" x="60" y="1490" width="66" height="72" />
         <use href="#treeB" x="1310" y="1470" width="60" height="66" />
@@ -176,8 +169,8 @@
       <!-- ===== SCENE 3: WEST ALPINE ROAD — over the ridge, open ground ===== -->
       <rect x="0" y="2880" width="1440" height="1440" fill="url(#grassGrad)" />
       <polygon fill="#6FA9C9" opacity="0.3" points="0,2985 0,2945 200,2905 420,2952 640,2892 860,2942 1080,2900 1300,2946 1440,2912 1440,2985" />
-      <path d="M 720,2880 L 660,3080 L 760,3280 L 680,3480 L 700,3600 L 660,3800 L 720,4000 L 700,4200" fill="none" stroke="#A79C86" stroke-width="66" stroke-linecap="round" stroke-linejoin="round" />
-      <path d="M 720,2880 L 660,3080 L 760,3280 L 680,3480 L 700,3600 L 660,3800 L 720,4000 L 700,4200" fill="none" stroke="#F3EBDD" stroke-width="5" stroke-dasharray="4 20" stroke-linecap="round" />
+      <path d="M 720,2880 Q 660,3080 710,3180 Q 760,3280 720,3380 Q 680,3480 690,3540 Q 700,3600 680,3700 Q 660,3800 690,3900 Q 720,4000 700,4200" fill="none" stroke="#A79C86" stroke-width="66" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M 720,2880 Q 660,3080 710,3180 Q 760,3280 720,3380 Q 680,3480 690,3540 Q 700,3600 680,3700 Q 660,3800 690,3900 Q 720,4000 700,4200" fill="none" stroke="#F3EBDD" stroke-width="5" stroke-dasharray="4 20" stroke-linecap="round" />
       <g opacity="0.9">
         <use href="#treeA" x="80" y="2980" width="54" height="60" />
         <use href="#treeB" x="1300" y="3040" width="52" height="58" />
@@ -190,11 +183,40 @@
       </g>
       <circle cx="700" cy="3600" r="16" fill="#F3EBDD" stroke="#202422" stroke-width="4" />
     </svg>
+  </div>
 
-    <!-- Strava badge, positioned in-world near the Old La Honda marker so it pans with the
-         illustration. Text badge, not the actual Strava logo mark — trademark reasoning is the
-         same as the nav's Strava badge (see website/setup.md). -->
-    <div class="scene-strava-badge" style="top: 45.1%; left: 60%;"><span class="check">&#10003;</span> Strava Segment &middot; Verified</div>
+  <!-- Crest-flip transition: plays only during the La Honda -> West Alpine scroll segment. A
+       marker climbs the front face's short road stub, the card zooms in, then the whole thing
+       does a 3D flip (rotateY) to its back face — "cresting the ridge" and landing on the other
+       side. The real .scene-track snaps to the West Alpine position while this overlay is fully
+       opaque, so the jump is hidden. See buildSceneScroll() in js/main.js. -->
+  <div class="crest-flip" id="crestFlip">
+    <div class="crest-flip-inner" id="crestFlipInner">
+      <div class="crest-face crest-front">
+        <svg viewBox="0 0 400 400" aria-hidden="true">
+          <rect width="400" height="400" fill="#123B2A" />
+          <rect x="0" y="0" width="400" height="90" fill="#6FA9C9" />
+          <polygon fill="#0D2E20" points="0,90 0,60 60,40 130,65 200,30 270,60 340,35 400,55 400,90" />
+          <ellipse cx="55" cy="165" rx="26" ry="24" fill="#0D2E20" /><ellipse cx="45" cy="150" rx="15" ry="14" fill="#1B4A34" />
+          <ellipse cx="345" cy="175" rx="24" ry="22" fill="#123B2A" /><ellipse cx="345" cy="158" rx="13" ry="15" fill="#1B4A34" />
+          <ellipse cx="35" cy="300" rx="28" ry="26" fill="#0D2E20" /><ellipse cx="25" cy="284" rx="16" ry="15" fill="#1B4A34" />
+          <ellipse cx="365" cy="310" rx="26" ry="24" fill="#123B2A" /><ellipse cx="365" cy="292" rx="14" ry="16" fill="#1B4A34" />
+          <path id="crestRoadFront" d="M 200,400 Q 170,300 210,220 Q 240,150 200,90" fill="none" stroke="#A79C86" stroke-width="34" stroke-linecap="round" />
+          <path d="M 200,400 Q 170,300 210,220 Q 240,150 200,90" fill="none" stroke="#F3EBDD" stroke-width="4" stroke-dasharray="3 14" stroke-linecap="round" />
+          <circle id="crestMarker" cx="200" cy="400" r="9" fill="#F3EBDD" stroke="#202422" stroke-width="3" />
+        </svg>
+      </div>
+      <div class="crest-face crest-back">
+        <svg viewBox="0 0 400 400" aria-hidden="true">
+          <rect width="400" height="400" fill="#123B2A" />
+          <rect x="0" y="0" width="400" height="150" fill="#6FA9C9" />
+          <polygon fill="#788F52" opacity="0.65" points="0,150 0,115 70,95 150,120 230,90 300,115 400,98 400,150" />
+          <rect x="0" y="150" width="400" height="250" fill="#788F52" opacity="0.3" />
+          <path d="M 200,90 Q 232,180 190,260 Q 158,330 200,400" fill="none" stroke="#A79C86" stroke-width="30" stroke-linecap="round" />
+          <path d="M 200,90 Q 232,180 190,260 Q 158,330 200,400" fill="none" stroke="#F3EBDD" stroke-width="4" stroke-dasharray="3 14" stroke-linecap="round" />
+        </svg>
+      </div>
+    </div>
   </div>
 
   <div class="scene-labels">
@@ -206,7 +228,7 @@
         <div class="scroll-row"><span>Scroll</span><span class="bar"></span></div>
       </div>
     </div>
-    <div class="scene-label" id="sceneLabel1">
+    <div class="scene-label scene-label-left" id="sceneLabel1">
       <div class="scene-card">
         <div class="hero-eyebrow">Wednesday &middot; Anchor Ride</div>
         <h2><em>Old</em> La Honda</h2>
@@ -231,8 +253,7 @@
     <div class="insta-handle"><span class="at">@</span>skylinevelo.cc</div>
     <p class="lede" style="margin: 12px auto 0;">Follow along for ride updates, event announcements, and photos from the road.</p>
     <div class="btn-row" style="margin-top: 28px; justify-content: center; display: flex;">
-      <!-- TODO: replace with the real link once the Instagram account exists (website/setup.md) -->
-      <a class="btn ghost" href="#">Follow Us</a>
+      <a class="btn ghost" href="https://www.instagram.com/skylinevelo.cc/" target="_blank" rel="noopener">Follow Us</a>
     </div>
   </div>
 </section>
@@ -261,8 +282,7 @@
       <div class="meta">Menlo Park &amp; the SF Peninsula &middot; Founded 2026</div>
     </div>
     <div class="socials">
-      <!-- TODO: replace with the real link once the Instagram account exists (see website/setup.md) -->
-      <a href="#">Instagram</a>
+      <a href="https://www.instagram.com/skylinevelo.cc/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.strava.com/clubs/skylinevelo" target="_blank" rel="noopener">Strava</a>
     </div>
   </div>
