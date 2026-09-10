@@ -20,7 +20,7 @@
     <a class="page-link" href="events.html">Events</a>
     <a class="page-link" href="roster.html">Roster</a>
     <a class="page-link" href="about.html">About</a>
-    <a class="page-link" href="contact.html">Contact</a>
+    <a class="page-link" href="join.html">Join</a>
     <a class="icon-link" href="https://www.instagram.com/skylinevelo.cc/" target="_blank" rel="noopener" aria-label="Instagram">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="3" y="3" width="18" height="18" rx="5"/>
@@ -32,16 +32,16 @@
   <button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
 </nav>
 
-<!-- OPENING SCENE: pinned scroll-through journey, one continuous tall illustration read top to
-     bottom — open sky, down to where the skyline ridge meets the green mountains, down onto the
-     roads (Old La Honda, then West Alpine Road). A floating card holds each scene's copy; the
-     sequence per scene change is: card text fades out -> illustration shifts up to the next
-     chapter -> new card text fades in (buildSceneScroll() in js/main.js runs this as one scrubbed
-     GSAP timeline). Original hand-coded SVG line art, not a photo — see the note in css/style.css
-     above .scene-pin for why. -->
+<!-- HERO: 2026-09-09 — simplified back down to a single static scene after Old La Honda and West
+     Alpine were pulled off the homepage entirely (Ray's call: the 3-chapter pinned-scroll version
+     kept fighting real content — first the SVG's non-uniform stretch distorted real photos, then
+     even after fixing that it just took up too much page for what it showed). No more GSAP pin/
+     scrub — this is now a plain hero section, sky-and-ridgeline art only. The two rides live in the
+     compact "Featured Rides" preview section below instead, which links to events.html for the
+     real schedule. See decisions-log.md 2026-09-09. -->
 <section class="scene-pin" id="scenePin">
   <div class="scene-track" id="sceneTrack">
-    <svg viewBox="0 0 1440 4320" preserveAspectRatio="none" aria-hidden="true">
+    <svg viewBox="0 0 1440 1440" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
         <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#3f7d9c" />
@@ -79,52 +79,11 @@
       <polygon fill="#7FA593" opacity="0.55" points="0,910 0,860 180,842 360,866 540,836 720,860 900,830 1080,858 1260,833 1440,856 1440,910" />
       <polygon fill="#4C7A63" opacity="0.85" points="0,940 0,880 160,850 340,890 520,846 700,886 880,840 1060,880 1240,848 1440,878 1440,940" />
       <polygon fill="#123B2A" points="0,1440 0,940 150,860 300,930 450,830 600,900 750,800 900,880 1050,820 1200,900 1350,840 1440,900 1440,1440" />
-
-      <!-- ===== SCENE 2: OLD LA HONDA — the climb, trees lining the road ===== -->
-      <rect x="0" y="1440" width="1440" height="1440" fill="#123B2A" />
-      <path d="M 720,1440 Q 400,1600 700,1690 Q 1000,1780 690,1870 Q 380,1960 700,2050 Q 1020,2140 710,2230 Q 400,2320 700,2410 Q 1000,2500 710,2590 Q 420,2680 720,2880" fill="none" stroke="#A79C86" stroke-width="60" stroke-linecap="round" stroke-linejoin="round" />
-      <path d="M 720,1440 Q 400,1600 700,1690 Q 1000,1780 690,1870 Q 380,1960 700,2050 Q 1020,2140 710,2230 Q 400,2320 700,2410 Q 1000,2500 710,2590 Q 420,2680 720,2880" fill="none" stroke="#F3EBDD" stroke-width="5" stroke-dasharray="4 20" stroke-linecap="round" />
-      <g opacity="0.95">
-        <use href="#treeA" x="60" y="1490" width="66" height="72" />
-        <use href="#treeB" x="1310" y="1470" width="60" height="66" />
-        <use href="#treeB" x="120" y="1640" width="56" height="62" />
-        <use href="#treeA" x="1260" y="1660" width="70" height="76" />
-        <use href="#treeA" x="40" y="1820" width="60" height="66" />
-        <use href="#treeB" x="1320" y="1840" width="64" height="70" />
-        <use href="#treeB" x="90" y="2010" width="58" height="64" />
-        <use href="#treeA" x="1280" y="2020" width="66" height="72" />
-        <use href="#treeA" x="50" y="2210" width="62" height="68" />
-        <use href="#treeB" x="1300" y="2200" width="60" height="66" />
-        <use href="#treeB" x="110" y="2420" width="56" height="62" />
-        <use href="#treeA" x="1270" y="2430" width="68" height="74" />
-        <use href="#treeA" x="40" y="2630" width="60" height="66" />
-        <use href="#treeB" x="1310" y="2620" width="62" height="68" />
-        <use href="#treeB" x="100" y="2800" width="58" height="64" />
-        <use href="#treeA" x="1290" y="2790" width="64" height="70" />
-      </g>
-      <circle cx="700" cy="1960" r="16" fill="#F3EBDD" stroke="#202422" stroke-width="4" />
-
-      <!-- ===== SCENE 3: WEST ALPINE ROAD — over the ridge, open ground ===== -->
-      <rect x="0" y="2880" width="1440" height="1440" fill="url(#grassGrad)" />
-      <polygon fill="#6FA9C9" opacity="0.3" points="0,2985 0,2945 200,2905 420,2952 640,2892 860,2942 1080,2900 1300,2946 1440,2912 1440,2985" />
-      <path d="M 720,2880 Q 1000,3060 700,3150 Q 400,3240 710,3330 Q 1020,3420 700,3510 Q 380,3600 690,3690 Q 1000,3780 710,3870 Q 420,3960 700,4200" fill="none" stroke="#A79C86" stroke-width="54" stroke-linecap="round" stroke-linejoin="round" />
-      <path d="M 720,2880 Q 1000,3060 700,3150 Q 400,3240 710,3330 Q 1020,3420 700,3510 Q 380,3600 690,3690 Q 1000,3780 710,3870 Q 420,3960 700,4200" fill="none" stroke="#F3EBDD" stroke-width="5" stroke-dasharray="4 20" stroke-linecap="round" />
-      <g opacity="0.9">
-        <use href="#treeA" x="80" y="2980" width="54" height="60" />
-        <use href="#treeB" x="1300" y="3040" width="52" height="58" />
-        <use href="#treeB" x="140" y="3340" width="50" height="56" />
-        <use href="#treeA" x="1260" y="3420" width="56" height="62" />
-        <use href="#treeA" x="90" y="3720" width="52" height="58" />
-        <use href="#treeB" x="1290" y="3780" width="50" height="56" />
-        <use href="#treeB" x="150" y="4080" width="48" height="54" />
-        <use href="#treeA" x="1270" y="4100" width="54" height="60" />
-      </g>
-      <circle cx="690" cy="3600" r="16" fill="#F3EBDD" stroke="#202422" stroke-width="4" />
     </svg>
   </div>
 
   <div class="scene-labels">
-    <!-- Scene 1: big text filling the sky, no card. -->
+    <!-- Big text filling the sky, no card. -->
     <div class="scene-label scene-hero-text" id="sceneLabel0">
       <div class="hero-number-watermark" aria-hidden="true">35</div>
       <div class="hero-eyebrow">SF Peninsula &middot; 18 &amp; Under &middot; Free</div>
@@ -133,38 +92,35 @@
         <span class="line sub">U18 Cycling Club</span>
       </h1>
     </div>
-    <!-- Scene 2: Old La Honda — the events-page route-card content split across either side of
-         the road: meta (badge/time/location) on the left, deeper description on the right. -->
-    <div class="scene-label scene-split" id="sceneLabel1">
-      <div class="scene-flank scene-flank-left">
-        <div class="flank-badge">Anchor Ride</div>
-        <div class="hero-eyebrow">Wednesday &middot; Anchor Ride</div>
-        <div class="flank-meta">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg> Every Wednesday &middot; evening &middot; time TBA</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z" /><circle cx="12" cy="9" r="2.5" /></svg> Meet at Stanford Hills Park</span>
+  </div>
+</section>
+
+<!-- FEATURED RIDES: compact preview of the two weekly rides, replacing the old pinned-scroll
+     chapters (2026-09-09 — see decisions-log.md). Same AI-stylized route images used on
+     events.html; this is a teaser, not the full schedule, so it links straight to events.html
+     rather than repeating the day/time/meeting-point details. -->
+<section class="rides-preview-section section-chalk reveal">
+  <div class="wrap-inner">
+    <div class="eyebrow">The Rides</div>
+    <h2>Two climbs, every week.</h2>
+    <div class="rides-preview-grid">
+      <a class="ride-preview-card" href="events.html">
+        <img src="assets/old-la-honda-ai-route.png" alt="Old La Honda route map">
+        <div class="ride-preview-overlay">
+          <span class="ride-preview-day">Wednesday</span>
+          <h3>Old La Honda</h3>
         </div>
-      </div>
-      <div class="scene-flank scene-flank-right">
-        <h2><em>Old</em> La Honda</h2>
-        <p>The club's original ride — before there was a club, there was a group chat ranking each other on this exact Strava segment. A short, steep climb that's become the anchor of the whole week: show up, chase the segment, go home.</p>
-        <div class="tag-row"><span>Wednesday</span><span>Short &amp; Steep</span></div>
-      </div>
+      </a>
+      <a class="ride-preview-card" href="events.html">
+        <img src="assets/west-alpine-ai-route.png" alt="West Alpine Road route map">
+        <div class="ride-preview-overlay">
+          <span class="ride-preview-day">Saturday</span>
+          <h3>West Alpine Road</h3>
+        </div>
+      </a>
     </div>
-    <!-- Scene 3: West Alpine Road — mirrored, description on the left, meta on the right. -->
-    <div class="scene-label scene-split" id="sceneLabel2">
-      <div class="scene-flank scene-flank-left">
-        <h2>West <em>Alpine</em> Road</h2>
-        <p>The weekend's longer ride climbs out past the ridge and onto West Alpine Road — quieter, more open, less about chasing a single segment and more about putting in real miles together.</p>
-        <div class="tag-row"><span>Saturday</span><span>Open &amp; Long</span></div>
-      </div>
-      <div class="scene-flank scene-flank-right">
-        <div class="flank-badge">Long Ride</div>
-        <div class="hero-eyebrow">Saturday &middot; Long Ride</div>
-        <div class="flank-meta">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg> Every Saturday &middot; time TBA</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z" /><circle cx="12" cy="9" r="2.5" /></svg> Meet at Stanford Hills Park</span>
-        </div>
-      </div>
+    <div class="btn-row" style="justify-content: center; margin-top: 32px; display: flex;">
+      <a class="btn ghost" href="events.html">See Full Schedule</a>
     </div>
   </div>
 </section>

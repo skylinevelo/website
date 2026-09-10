@@ -6,9 +6,9 @@
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Opening-scene entrance on load — scoped to the first scene's text only. Scenes 1 & 2 start at
-// opacity 0 and are brought in purely by scroll progress (see buildSceneScroll below), never by
-// this load-time tween.
+// Hero entrance on load. The hero used to be a 3-chapter pinned-scroll scene (Old La Honda + West
+// Alpine were part of it) — simplified to a single static scene on 2026-09-09, see
+// decisions-log.md, so this is now just a plain load-time fade-in, no scroll-driven pin/scrub.
 gsap.set('#sceneLabel0', { opacity: 1 });
 gsap.from('#sceneLabel0 .hero-eyebrow, #sceneLabel0 .sky-title .line', {
   y: 24,
@@ -59,57 +59,6 @@ if (siteNav) {
   });
 }
 
-// Opening scene: pins the section for a single scrubbed timeline that plays three sequential
-// beats per chapter change — text fades out, THEN the tall illustration shifts up to the next
-// chapter, THEN the new text fades in — rather than a continuous crossfade. Track height is 3x the
-// pin height by design (.scene-track in css/style.css is 300vh), so it always has exactly two
-// chapter-shifts' worth of travel regardless of viewport size. (The La Honda -> West Alpine shift
-// previously had a full-viewport zoom/flip transition here — removed per Ray's call, 2026-09-02;
-// back to a plain translate like the other shift.)
-function buildSceneScroll() {
-  const pin = document.querySelector('#scenePin');
-  const track = document.querySelector('#sceneTrack');
-  const labels = [
-    document.querySelector('#sceneLabel0'),
-    document.querySelector('#sceneLabel1'),
-    document.querySelector('#sceneLabel2'),
-  ];
-  if (!pin || !track || labels.some((l) => !l)) return;
-
-  ScrollTrigger.getById('sceneScroll')?.kill();
-
-  const distance = track.scrollHeight - pin.clientHeight;
-  if (distance <= 0) return;
-  const step = distance / 2;
-
-  gsap.set(labels[0], { opacity: 1 });
-  gsap.set([labels[1], labels[2]], { opacity: 0 });
-  gsap.set(track, { y: 0 });
-
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      id: 'sceneScroll',
-      trigger: pin,
-      start: 'top top',
-      end: () => '+=' + pin.clientHeight * 4.5,
-      scrub: true,
-      pin: true,
-      invalidateOnRefresh: true,
-    },
-  });
-
-  tl.to(labels[0], { opacity: 0, duration: 1 })
-    .to(track, { y: -step, duration: 1.6, ease: 'power1.inOut' })
-    .to(labels[1], { opacity: 1, duration: 1 })
-    .to({}, { duration: 1.6 }) // hold — reading time on Old La Honda
-    .to(labels[1], { opacity: 0, duration: 1 })
-    .to(track, { y: -distance, duration: 1.6, ease: 'power1.inOut' })
-    .to(labels[2], { opacity: 1, duration: 1 })
-    .to({}, { duration: 1.6 }); // hold at West Alpine Road
-}
-
-buildSceneScroll();
-window.addEventListener('resize', () => {
-  clearTimeout(window._sceneResizeTimer);
-  window._sceneResizeTimer = setTimeout(() => ScrollTrigger.refresh(), 200);
-});
+// The pinned/scrubbed multi-chapter scroll timeline that used to live here (buildSceneScroll) was
+// removed 2026-09-09 along with the Old La Honda / West Alpine hero chapters — see
+// decisions-log.md. The hero is now a single static scene, nothing left to scrub between.

@@ -251,6 +251,13 @@ nav.site-nav .icon-link.strava-badge {
   margin-top: 20px;
 }
 .page-body .card h3 { font-family: 'Fraunces', serif; font-weight: 500; }
+.map-embed {
+  aspect-ratio: 16 / 9;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--vellum);
+}
+.map-embed iframe { width: 100%; height: 100%; display: block; filter: grayscale(0.15) contrast(1.05); }
 
 footer.site-footer {
   background: var(--chalk);
@@ -286,30 +293,21 @@ footer.site-footer .watermark {
   z-index: 0;
 }
 
-/* ---------- Home page opening: pinned scroll-through scene ----------
-   2026-09-02, second pass: rebuilt as ONE TALL vertical illustration (not a wide horizontal
-   panorama) with a STAGED reveal, per Ray's steer — "based on the structured one you gave me
-   earlier" (i.e. this build), but: text disappears, THEN the image shifts to the next chapter,
-   THEN the new text appears — three sequential beats, not a continuous crossfade. Journey reads
-   top to bottom as you scroll: open sky -> the skyline ridge meets green mountains -> down onto
-   the roads (Old La Honda, then West Alpine Road). Driven by a single scrubbed GSAP timeline in
-   buildSceneScroll() (js/main.js) — .scene-track is 300vh tall and translates upward in two steps
-   while .scene-label groups fade out/in between each hold. Original hand-coded SVG line art, not a
-   photo — see website/setup.md item 11 for why. */
+/* ---------- Home page hero ----------
+   2026-09-09: simplified back down to a single static scene (sky -> ridge -> trees, hand-coded SVG
+   line art) after Old La Honda and West Alpine were pulled off the homepage entirely — the 3-chapter
+   pinned-scroll build (see git history / prior versions of this comment for that whole saga) kept
+   fighting real ride content. No more GSAP pin/scrub here; .scene-track is just a normal full-bleed
+   backdrop now. The two rides get a compact preview further down the page instead (.rides-preview-*
+   below), which links to events.html for the real schedule. See decisions-log.md 2026-09-09. */
 .scene-pin {
-  height: 100vh;
+  height: 90vh;
   overflow: hidden;
   position: relative;
   background: var(--ink);
   color: var(--paper);
 }
-.scene-track {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 300vh;
-  will-change: transform;
-}
+.scene-track { position: absolute; inset: 0; }
 .scene-track svg { display: block; width: 100%; height: 100%; }
 
 .scene-labels { position: absolute; inset: 0; pointer-events: none; display: flex; align-items: flex-start; justify-content: center; padding-top: 24vh; }
@@ -533,6 +531,45 @@ footer.site-footer .watermark {
   .route-card, .route-card.reverse { grid-template-columns: 1fr; }
   .route-card.reverse .route-map, .route-card.reverse .route-desc { order: initial; }
   .route-map { min-height: 220px; }
+}
+
+/* Homepage "Featured Rides" preview (2026-09-09) — a compact teaser for the two weekly rides,
+   replacing the old full-page pinned-scroll chapters. Deliberately light on detail (just name +
+   day) since it's a teaser linking to events.html, not a restatement of the schedule. */
+.rides-preview-section { padding: 96px 24px; text-align: center; }
+.rides-preview-grid {
+  margin: 40px auto 0;
+  max-width: var(--max-w);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  text-align: left;
+}
+.ride-preview-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  border-radius: 9px;
+  overflow: hidden;
+  border: 1px solid var(--vellum);
+}
+.ride-preview-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s ease; }
+.ride-preview-card:hover img { transform: scale(1.05); }
+.ride-preview-overlay {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(13,46,32,0.92), transparent);
+}
+.ride-preview-day {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+.ride-preview-overlay h3 { color: var(--paper); font-size: 1.25rem; margin-top: 4px; }
+@media (max-width: 640px) {
+  .rides-preview-grid { grid-template-columns: 1fr; }
 }
 
 /* Leadership — officers only, deliberately (see decisions-log.md, minors-privacy consideration).
