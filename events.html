@@ -96,8 +96,20 @@
     </div>
 
     <div class="card">
-      <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Full event calendar</h3>
-      <p style="margin: 0;">Races, team camps, and special rides beyond the weekly schedule will live here once there are real ones to list — not building a placeholder calendar with fake events on it.</p>
+      <!-- This is Strava's real "Share Club Activities" embed (a recent-rides feed, not an events
+           calendar — Strava doesn't offer a public events-calendar widget). Relabeled honestly
+           below rather than calling it an "event calendar." Real risk: Strava's community forum has
+           reports of these iframes rendering blank since ~Jan 20, 2026 — if that's what happens
+           here, the fallback is pulling club activity via the Strava API instead (see
+           decisions-log.md 2026-09-10). -->
+      <h3 style="font-size: 1.3rem; margin-bottom: 16px;">Recent Club Activity</h3>
+      <!-- Strava renders this widget's content at a fixed 300x160 regardless of the iframe's own
+           width/height attributes, so simply enlarging the iframe just added empty space around an
+           unchanged widget. Real fix: CSS-scale the actual rendered content (transform: scale),
+           wrapped in a box sized to match the scaled dimensions so layout doesn't overflow. -->
+      <div style="width: 480px; max-width: 100%; height: 256px; margin: 0 auto; overflow: hidden;">
+        <iframe allowtransparency="true" frameborder="0" height="160" scrolling="no" src="https://www.strava.com/clubs/2241027/latest-rides/237518c572fc48c1264585e44f7a39244e5631d2?show_rides=false" width="300" style="border:0; transform: scale(1.6); transform-origin: top left;" title="Skyline Velo weekly club activity on Strava"></iframe>
+      </div>
     </div>
 
     <p style="margin-top: 40px;"><a class="btn" href="join.html">Join the Club</a></p>
