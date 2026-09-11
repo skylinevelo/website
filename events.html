@@ -39,15 +39,13 @@
   </div>
 </section>
 
-<section class="page-body section-chalk">
+<section class="page-body section-chalk" style="padding-top: 28px;">
   <div class="wrap">
-    <p>A short weekday ride and a longer weekend one — designed to actually fit a school schedule, not fight it.</p>
-
     <!-- Route cards — our own version of a "weekly ride" map card: illustrated route on one side,
-         a deeper description on the other. Destinations and meeting point are real (rides/schedule.md,
-         confirmed 2026-09-02); exact meeting time is still TBD, shown honestly as TBA rather than
-         inventing it — same for distance, left off entirely since it isn't set yet. -->
-    <div class="route-card" style="margin-top: 44px;">
+         a deeper description on the other. Destinations, meeting point, and times are all real
+         (rides/schedule.md — times confirmed 2026-09-10); distance still left off entirely since
+         it isn't set. -->
+    <div class="route-card">
       <div class="route-map">
         <div class="route-badge">Anchor Ride</div>
         <!-- AI-stylized route map (2026-09-09) — Ray fed the real satellite screenshot of his own
@@ -56,7 +54,7 @@
              shape itself is real, not invented. See decisions-log.md 2026-09-09. -->
         <img src="assets/old-la-honda-ai-route.png" alt="Old La Honda route map" style="width:100%;height:100%;object-fit:cover;display:block;">
         <div class="route-meta">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg> Every Wednesday &middot; evening &middot; time TBA</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg> Every Wednesday &middot; 4:45 PM</span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z" /><circle cx="12" cy="9" r="2.5" /></svg> Meet at Stanford Hills Park</span>
         </div>
       </div>
@@ -75,7 +73,7 @@
              (rides/Saturday ride.gpx), not generated from scratch. See decisions-log.md 2026-09-09. -->
         <img src="assets/west-alpine-ai-route.png" alt="West Alpine Road route map" style="width:100%;height:100%;object-fit:cover;display:block;">
         <div class="route-meta">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg> Every Saturday &middot; time TBA</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg> Every Saturday &middot; 9:30 AM</span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z" /><circle cx="12" cy="9" r="2.5" /></svg> Meet at Stanford Hills Park</span>
         </div>
       </div>
@@ -88,28 +86,11 @@
 
     <div class="card" style="margin-top: 24px;">
       <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Meeting point</h3>
-      <p style="margin: 0 0 16px;">Both rides meet at Stanford Hills Park, Menlo Park — exact meeting times are still being finalized, so check Instagram for the latest before showing up.</p>
+      <p style="margin: 0 0 16px;">Both rides meet at Stanford Hills Park, Menlo Park — Wednesdays at 4:45 PM, Saturdays at 9:30 AM.</p>
       <div class="map-embed">
         <iframe src="https://maps.google.com/maps?q=Stanford+Hills+Park,2400+Branner+Dr,Menlo+Park,CA+94025&output=embed" width="100%" height="100%" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map to Stanford Hills Park"></iframe>
       </div>
       <p style="margin: 16px 0 0;"><a class="btn ghost" href="https://www.google.com/maps/dir/?api=1&destination=Stanford+Hills+Park%2C+2400+Branner+Dr%2C+Menlo+Park%2C+CA+94025" target="_blank" rel="noopener">Get Directions</a></p>
-    </div>
-
-    <div class="card">
-      <!-- This is Strava's real "Share Club Activities" embed (a recent-rides feed, not an events
-           calendar — Strava doesn't offer a public events-calendar widget). Relabeled honestly
-           below rather than calling it an "event calendar." Real risk: Strava's community forum has
-           reports of these iframes rendering blank since ~Jan 20, 2026 — if that's what happens
-           here, the fallback is pulling club activity via the Strava API instead (see
-           decisions-log.md 2026-09-10). -->
-      <h3 style="font-size: 1.3rem; margin-bottom: 16px;">Recent Club Activity</h3>
-      <!-- Strava renders this widget's content at a fixed 300x160 regardless of the iframe's own
-           width/height attributes, so simply enlarging the iframe just added empty space around an
-           unchanged widget. Real fix: CSS-scale the actual rendered content (transform: scale),
-           wrapped in a box sized to match the scaled dimensions so layout doesn't overflow. -->
-      <div style="width: 480px; max-width: 100%; height: 256px; margin: 0 auto; overflow: hidden;">
-        <iframe allowtransparency="true" frameborder="0" height="160" scrolling="no" src="https://www.strava.com/clubs/2241027/latest-rides/237518c572fc48c1264585e44f7a39244e5631d2?show_rides=false" width="300" style="border:0; transform: scale(1.6); transform-origin: top left;" title="Skyline Velo weekly club activity on Strava"></iframe>
-      </div>
     </div>
 
     <p style="margin-top: 40px;"><a class="btn" href="join.html">Join the Club</a></p>

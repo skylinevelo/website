@@ -28,7 +28,7 @@ in hand.
 - [ ] Old La Honda description (longer version): *"The club's original ride — before there was a club, there was a group chat ranking each other on this exact Strava segment. A short, steep climb that's become the anchor of the whole week: show up, chase the segment, go home. Evening slot, built to fit around school."*
 - [ ] West Alpine Road description (longer version): *"The weekend's longer ride climbs out past the ridge and onto West Alpine Road — quieter, more open, less about chasing a single segment and more about putting in real miles together. It's the ride the rest of the week points toward."*
 - [ ] "Full event calendar" card text: *"Races, team camps, and special rides beyond the weekly schedule will live here once there are real ones to list — not building a placeholder calendar with fake events on it."*
-- [ ] "Meeting point" card intro line (added 2026-09-09 alongside the real map embed): *"Both rides meet at Stanford Hills Park, Menlo Park — exact meeting times are still being finalized, so check Instagram for the latest before showing up."*
+- [ ] "Meeting point" card intro line (added 2026-09-09 alongside the real map embed, times confirmed 2026-09-10): *"Both rides meet at Stanford Hills Park, Menlo Park — Wednesdays at 4:45 PM, Saturdays at 9:30 AM."*
 
 ## roster.html
 - [ ] Intro line: *"Real roles, real responsibility — not decorative titles. Officer roster shown here; membership is open (see the Join page) and general member names stay off the public site."*
