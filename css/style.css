@@ -122,6 +122,18 @@ nav.site-nav.scrolled {
   backdrop-filter: none;
 }
 
+/* 2026-09-10: the 4 interior pages that share the plain page-hero pattern (About, Events, Join,
+   Roster — not the homepage, which has its own scene backdrop and wants the transparent-then-dark
+   scroll behavior; not the waiver page, which isn't in the main nav) keep the nav in its "scrolled"
+   charcoal shade at all times — Ray's pick, over the lighter page-hero green tried first — no
+   transparent-over-hero state on load. */
+nav.site-nav.nav-always-green,
+nav.site-nav.nav-always-green.scrolled {
+  background: var(--charcoal);
+  border-bottom: 1px solid var(--hairline-dark);
+  backdrop-filter: none;
+}
+
 nav.site-nav .brand { display: flex; align-items: center; gap: 9px; }
 nav.site-nav .brand a { color: var(--paper); text-decoration: none; display: flex; align-items: center; gap: 9px; }
 /* 2026-09-08: real shield mark (assets/logo-shield-transparent.png) replaces the placeholder
