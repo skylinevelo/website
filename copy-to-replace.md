@@ -34,7 +34,7 @@ in hand.
 - [x] Intro line — removed entirely 2026-09-12 (Ray's call). Each of the 4 officer cards now also carries a "Ride Leader" tag alongside their existing role(s), since all four currently lead rides.
 
 ## join.html
-- [ ] Intro line (2026-09-12: "no tryout" claim dropped since Ray's considering adding one, and framing changed from "here's what happens" to "you have to do this" since Ray wants these read as requirements): *"There's no fee or minimum fitness level to join Skyline Velo Cycling Club. You have to do the following before your first ride:"*
+- [ ] Intro line (2026-09-12: "no tryout" claim dropped since Ray's considering adding one, and framing changed from "here's what happens" to "you just have to do this" since Ray wants these read as requirements): *"There's no fee or minimum fitness level to join Skyline Velo Cycling Club. You just have to do the following before your first ride:"*
 - [ ] Step 1 ("Get in touch") description — as of 2026-09-09 this also carries the old contact.html's info (email/Instagram/Strava), since the standalone Contact page was folded in here. (2026-09-11: trailing "No form, just a real inbox someone actually checks." sentence trimmed as an AI-sounding hedge.)
 - [ ] Step 2 ("Get the waiver signed") description.
 - [ ] Step 3 ("Show up") description.
