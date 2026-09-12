@@ -60,6 +60,10 @@
             <label for="riderGrade">Rider grade / age</label>
             <input type="text" id="riderGrade" name="rider_grade" required>
           </div>
+          <div class="field">
+            <label for="riderSchool">School</label>
+            <input type="text" id="riderSchool" name="rider_school" required>
+          </div>
         </div>
         <div class="field-row">
           <div class="field">
@@ -72,8 +76,9 @@
           </div>
         </div>
         <div class="field">
-          <label for="parentPhone">Parent/guardian phone (optional)</label>
-          <input type="tel" id="parentPhone" name="parent_phone">
+          <label for="parentPhone">Parent/guardian phone</label>
+          <input type="tel" id="parentPhone" name="parent_phone" required>
+          <span class="hint">Needed in case of an emergency during a ride.</span>
         </div>
         <div class="field">
           <label for="joinMessage">Anything else we should know? (optional)</label>
