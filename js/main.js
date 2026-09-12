@@ -62,3 +62,45 @@ if (siteNav) {
 // The pinned/scrubbed multi-chapter scroll timeline that used to live here (buildSceneScroll) was
 // removed 2026-09-09 along with the Old La Honda / West Alpine hero chapters — see
 // decisions-log.md. The hero is now a single static scene, nothing left to scrub between.
+
+// Formspree AJAX submit — shared by the join-interest form (join.html) and the waiver
+// e-signature form (waiver.html), added 2026-09-12. Posts with an Accept: application/json header
+// so Formspree responds with JSON instead of redirecting, and swaps the form for an inline
+// confirmation message instead of navigating away.
+function bindFormspreeForm(formId, statusId, successMessage) {
+  const form = document.getElementById(formId);
+  const status = document.getElementById(statusId);
+  if (!form || !status) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitBtn = form.querySelector('button[type="submit"]');
+    if (form.action.includes('REPLACE_WITH_')) {
+      status.textContent = 'Form isn’t connected yet — the site owner still needs to add a real Formspree endpoint.';
+      status.classList.add('error');
+      return;
+    }
+    status.textContent = 'Sending…';
+    status.classList.remove('error');
+    if (submitBtn) submitBtn.disabled = true;
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+      if (response.ok) {
+        form.hidden = true;
+        status.textContent = successMessage;
+      } else {
+        status.textContent = 'Something went wrong sending that — please try again, or reach out directly (see links above).';
+        status.classList.add('error');
+      }
+    } catch (err) {
+      status.textContent = 'Something went wrong sending that — please try again, or reach out directly (see links above).';
+      status.classList.add('error');
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+    }
+  });
+}

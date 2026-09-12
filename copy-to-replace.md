@@ -15,8 +15,8 @@ in hand.
 - [ ] Hero eyebrow: *"SF Peninsula · 18 & Under · Free"* — fine as a factual tag, lower priority than the others.
 - [ ] Old La Honda flank description: *"The club's original ride — before there was a club, there was a group chat ranking each other on this exact Strava segment. A short, steep climb that's become the anchor of the whole week: show up, chase the segment, go home."*
 - [ ] West Alpine Road flank description: *"The weekend's longer ride climbs out past the ridge and onto West Alpine Road — quieter, more open, less about chasing a single segment and more about putting in real miles together."*
-- [ ] Instagram section lede: *"Follow along for ride updates, event announcements, and photos from the road."*
-- [ ] Join CTA section (lede + surrounding copy) — **this block is now repeated verbatim at the bottom of index.html, about.html, events.html, roster.html, and waiver.html** (2026-09-09, Contact tab retired into a persistent Join CTA — see decisions-log.md). Fix it once, then copy the fix to all five: *"18 and under, any ability level, completely free — no membership fee, no dues. As the club grows, custom kits, local sponsorships, and a real racing division are all things we're building toward — not promises, just where this could go."*
+- [x] Instagram section — removed entirely from index.html (2026-09-11, Ray's call: dropping the "Follow Us" block from the home page).
+- [ ] Join CTA section (lede) — **this block is repeated verbatim at the bottom of index.html, about.html, events.html, roster.html, and waiver.html.** The old AI-voiced lede ("18 and under, any ability level, completely free...not promises, just where this could go.") was removed from all five on 2026-09-11 (Ray flagged it as reading as AI-written) and replaced with a shorter line pointing at the steps below: *"Click below to see the steps to join and get on your first ride."* Still Claude-drafted — swap for real voice whenever you get to this file.
 
 ## about.html
 - [ ] Origin story, paragraph 1: *"Before there was a club, there was a group chat ranking each other on local Strava segments — Old La Honda in Woodside, and every other climb worth bragging rights."*
@@ -31,11 +31,11 @@ in hand.
 - [ ] "Meeting point" card intro line (added 2026-09-09 alongside the real map embed, times confirmed 2026-09-10): *"Both rides meet at Stanford Hills Park, Menlo Park — Wednesdays at 4:45 PM, Saturdays at 9:30 AM."*
 
 ## roster.html
-- [ ] Intro line: *"Real roles, real responsibility — not decorative titles. Officer roster shown here; membership is open (see the Join page) and general member names stay off the public site."*
+- [ ] Intro line (2026-09-11: trailing "— not decorative titles" clause trimmed as an AI-sounding hedge, rest unchanged): *"Real roles, real responsibility. Officer roster shown here; membership is open (see the Join page) and general member names stay off the public site."*
 
 ## join.html
 - [ ] Intro line: *"There's no fee, no minimum fitness level, and no tryout to join Skyline Velo Cycling Club — just show up ready to ride. Here's what actually happens before your first ride:"*
-- [ ] Step 1 ("Get in touch") description — as of 2026-09-09 this also carries the old contact.html's info (email/Instagram/Strava), since the standalone Contact page was folded in here.
+- [ ] Step 1 ("Get in touch") description — as of 2026-09-09 this also carries the old contact.html's info (email/Instagram/Strava), since the standalone Contact page was folded in here. (2026-09-11: trailing "No form, just a real inbox someone actually checks." sentence trimmed as an AI-sounding hedge.)
 - [ ] Step 2 ("Get the waiver signed") description.
 - [ ] Step 3 ("Show up") description.
 

@@ -44,7 +44,45 @@
 
     <div class="card">
       <h3 style="font-size: 1.3rem; margin-bottom: 12px;">1. Get in touch</h3>
-      <p style="margin: 0;">Message us on <a href="https://www.instagram.com/skylinevelo.cc/" target="_blank" rel="noopener">Instagram</a>, email <a href="mailto:admin@skylinevelo.cc">admin@skylinevelo.cc</a>, or find us on <a href="https://www.strava.com/clubs/skylinevelo" target="_blank" rel="noopener">Strava</a> to let us know you're interested. No form, just a real inbox someone actually checks.</p>
+      <p style="margin: 0 0 4px;">Fill this out and we'll follow up by email — or message us on <a href="https://www.instagram.com/skylinevelo.cc/" target="_blank" rel="noopener">Instagram</a> or email <a href="mailto:admin@skylinevelo.cc">admin@skylinevelo.cc</a> directly.</p>
+
+      <!-- Formspree endpoint for join-interest submissions (separate from waiver.html's form, so
+           the two land in their own clean tables in Formspree's dashboard). -->
+      <form class="site-form" action="https://formspree.io/f/xnpqyekl" method="POST" id="joinInterestForm">
+        <input type="hidden" name="_subject" value="New join interest — Skyline Velo">
+        <div class="field-row">
+          <div class="field">
+            <label for="riderName">Rider name</label>
+            <input type="text" id="riderName" name="rider_name" required>
+          </div>
+          <div class="field">
+            <label for="riderGrade">Rider grade / age</label>
+            <input type="text" id="riderGrade" name="rider_grade" required>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="parentName">Parent/guardian name</label>
+            <input type="text" id="parentName" name="parent_name" required>
+          </div>
+          <div class="field">
+            <label for="parentEmail">Parent/guardian email</label>
+            <input type="email" id="parentEmail" name="_replyto" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="parentPhone">Parent/guardian phone (optional)</label>
+          <input type="tel" id="parentPhone" name="parent_phone">
+        </div>
+        <div class="field">
+          <label for="joinMessage">Anything else we should know? (optional)</label>
+          <textarea id="joinMessage" name="message" rows="3"></textarea>
+        </div>
+        <div class="field-row" style="align-items: center; gap: 16px;">
+          <button type="submit" class="btn">Send</button>
+        </div>
+      </form>
+      <span class="form-status" id="joinFormStatus"></span>
     </div>
 
     <div class="card">
@@ -78,5 +116,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="js/main.js"></script>
+<script>
+  bindFormspreeForm('joinInterestForm', 'joinFormStatus', "Thanks — we've got it and will follow up by email soon.");
+</script>
 </body>
 </html>
