@@ -142,13 +142,15 @@
         <p>I grant Skyline Velo Cycling Club the right to photograph and film the participant during Club Activities, and to use such photos and video in the Club's social media, website, and promotional materials, without compensation. This is a condition of participation.</p>
         <h4>8. Governing Law</h4>
         <p>This agreement is governed by the laws of the State of California.</p>
+        <h4>9. Severability</h4>
+        <p>If any provision of this agreement is found by a court of competent jurisdiction to be unenforceable or invalid, that provision shall be limited or eliminated to the minimum extent necessary so that the remainder of this agreement remains in full force and effect.</p>
         <p>I have read this Acknowledgement of Risks, Waiver and Release of Liability. I understand its terms, I understand that the participant and I are giving up substantial rights by signing it, and I sign it freely and voluntarily, as the participant's parent or legal guardian, without any inducement.</p>
       </div>
     </div>
 
     <div class="card">
       <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Sign the waiver</h3>
-      <p style="margin: 0 0 4px;">Complete this on behalf of the rider. A parent or legal guardian must be the one filling this out and signing.</p>
+      <div class="signer-notice">A parent or legal guardian — someone 18 or older — must be the one filling out and signing this section, not the rider.</div>
 
       <!-- Formspree endpoint for waiver-signature submissions (separate from the join-interest form
            above, so the two land in their own clean tables in Formspree's dashboard). -->
@@ -173,16 +175,16 @@
           <input type="email" id="wGuardianEmail" name="_replyto" required>
         </div>
         <div class="field">
-          <label for="wAllergies">Known allergies / medical conditions ride leaders should be aware of</label>
+          <label for="wAllergies">Known allergies / medical conditions ride leaders should be aware of (optional)</label>
           <textarea id="wAllergies" name="allergies" rows="2"></textarea>
         </div>
         <div class="field-row">
           <div class="field">
-            <label for="wEmergencyName">Emergency contact name (if different from guardian above)</label>
+            <label for="wEmergencyName">Emergency contact name, if different from guardian above (optional)</label>
             <input type="text" id="wEmergencyName" name="emergency_name">
           </div>
           <div class="field">
-            <label for="wEmergencyPhone">Emergency contact phone</label>
+            <label for="wEmergencyPhone">Emergency contact phone (optional)</label>
             <input type="tel" id="wEmergencyPhone" name="emergency_phone">
           </div>
         </div>
@@ -197,9 +199,9 @@
         </div>
 
         <div class="field">
-          <label for="wSignature">Type your full legal name to sign</label>
+          <label for="wSignature">Parent/guardian: type your full legal name to sign (must be 18 or older — not the rider's name)</label>
           <input type="text" id="wSignature" name="guardian_signature" required>
-          <span class="hint">Typing your name above and submitting this form is your electronic signature, intended to have the same legal effect as a handwritten one.</span>
+          <span class="hint">This is the parent/guardian's signature, not the rider's. Typing your name above and submitting this form is your electronic signature, intended to have the same legal effect as a handwritten one.</span>
         </div>
         <input type="hidden" name="signed_date" id="wSignedDate">
 
