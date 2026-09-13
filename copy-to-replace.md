@@ -32,12 +32,14 @@ in hand.
 
 ## roster.html
 - [x] Intro line — removed entirely 2026-09-12 (Ray's call). Each of the 4 officer cards now also carries a "Ride Leader" tag alongside their existing role(s), since all four currently lead rides.
+- [ ] Member-count note (added 2026-09-12, membership-requirement decision): *"Counted members make it to at least one club ride a month — RSVP on Strava to be counted. Riding itself is always free and open to everyone, no RSVP required."*
 
 ## join.html
 - [ ] Intro line (2026-09-12: "no tryout" claim dropped since Ray's considering adding one, and framing changed from "here's what happens" to "you just have to do this" since Ray wants these read as requirements): *"There's no fee or minimum fitness level to join Skyline Velo Cycling Club. You just have to do the following before your first ride:"*
 - [ ] Step 1 ("Get in touch") description — as of 2026-09-09 this also carries the old contact.html's info (email/Instagram/Strava), since the standalone Contact page was folded in here. (2026-09-11: trailing "No form, just a real inbox someone actually checks." sentence trimmed as an AI-sounding hedge.)
 - [ ] Step 2 ("Get the waiver signed") description.
 - [ ] Step 3 ("Show up") description.
+- [ ] "Staying a member" card (added 2026-09-12, membership-requirement decision): *"Riding with us is always free and open to everyone 18 and under, no matter what. To count as an official club member, make it out to at least one ride a month — RSVP on our Strava club page so we know you're coming."*
 
 ## Not in scope here
 - Factual labels (ride days, "18 and under", nav labels, button text) aren't really "voice" — leave
