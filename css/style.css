@@ -641,7 +641,7 @@ footer.site-footer .watermark {
    panel (2026-09-20, Ray's call). Everyone else (non-officer members) stays in the plain
    .leadership-grid below, unchanged. */
 .leadership-panel {
-  margin-top: 48px;
+  margin-top: 12px;
   max-width: var(--max-w);
   margin-left: auto;
   margin-right: auto;
@@ -665,8 +665,8 @@ footer.site-footer .watermark {
 .leadership-panel-grid {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 56px;
   text-align: center;
 }
 @media (max-width: 640px) {
@@ -684,11 +684,12 @@ footer.site-footer .watermark {
   .leadership-panel-grid .leader-card {
     flex: 0 0 128px;
     scroll-snap-align: start;
+    padding-left: 10px;
+    padding-right: 10px;
   }
   .leadership-panel-grid .leader-photo-wrap,
   .leadership-panel-grid .leader-photo { width: 96px; height: 96px; }
   .leadership-panel-grid .leader-info { padding-top: 26px; }
-  .leadership-panel-grid .leader-role-badge { max-width: 140px; }
   .leadership-panel-grid .leader-role-badge span { font-size: 0.56rem; padding: 2px 7px; }
   .leadership-panel-grid .leader-name { font-size: 0.95rem; }
 }
@@ -732,11 +733,11 @@ footer.site-footer .watermark {
   bottom: -10px;
   transform: translateX(-50%);
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
+  flex-wrap: nowrap;
+  gap: 6px;
   justify-content: center;
   width: max-content;
-  max-width: 190px;
+  max-width: none;
 }
 .leader-role-badge span {
   font-size: 0.66rem;
