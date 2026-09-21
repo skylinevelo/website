@@ -655,14 +655,23 @@ footer.site-footer .watermark {
   gap: 32px;
   align-items: center;
 }
+.leadership-label-group { flex-shrink: 0; }
 /* Same small-caps blue treatment as the page's .eyebrow (not the enlarged .eyebrow-hero variant). */
 .leadership-label {
-  flex-shrink: 0;
   color: var(--accent-deep);
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font-size: 0.76rem;
+}
+/* Stated once here instead of repeating a "Ride Leader" tag on all 4 cards below — every officer
+   in this panel is a ride leader (see governance.md). */
+.leadership-sublabel {
+  color: var(--graphite);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 4px;
 }
 /* Wide desktop only: exactly 4 columns, no scroll. Below 1200px there isn't reliably enough
    room per column for a 2-pill badge (e.g. "Co-Founder"+"President") without it colliding with
@@ -773,7 +782,6 @@ footer.site-footer .watermark {
   border-radius: 999px;
   padding: 3px 10px;
 }
-.leader-tags span.role { color: var(--accent-deep); border-color: var(--accent-deep); }
 
 .member-count { margin-top: 56px; text-align: center; }
 .member-count .num { font-family: 'Fraunces', serif; font-weight: 500; font-size: clamp(2.4rem, 5.6vw, 3.6rem); color: var(--accent-deep); line-height: 1; }
