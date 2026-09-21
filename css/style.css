@@ -507,10 +507,15 @@ footer.site-footer .watermark {
   margin-bottom: 14px;
 }
 /* Roster page dropped its h1 tagline (2026-09-20) — this modifier gives the standalone
-   "Roster" eyebrow the old tagline's color/size so it doesn't look undersized on its own. */
+   "Roster" eyebrow the old tagline's full look (font, weight, case, color, size), not just an
+   enlarged version of the small blue eyebrow style. */
 .eyebrow-hero {
   color: var(--paper);
   font-size: clamp(2.1rem, 5.4vw, 3.4rem);
+  font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-transform: none;
 }
 
 .section { padding: 110px 24px; }
@@ -666,6 +671,26 @@ footer.site-footer .watermark {
 }
 @media (max-width: 640px) {
   .leadership-panel { flex-direction: column; align-items: stretch; padding: 28px 20px; }
+  /* Stay a horizontal row of 4, even on narrow screens — scroll sideways rather than
+     collapsing to one card per row (grid auto-fit would otherwise wrap to a single column). */
+  .leadership-panel-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 20px;
+    padding-bottom: 6px;
+    scroll-snap-type: x mandatory;
+  }
+  .leadership-panel-grid .leader-card {
+    flex: 0 0 128px;
+    scroll-snap-align: start;
+  }
+  .leadership-panel-grid .leader-photo-wrap,
+  .leadership-panel-grid .leader-photo { width: 96px; height: 96px; }
+  .leadership-panel-grid .leader-info { padding-top: 26px; }
+  .leadership-panel-grid .leader-role-badge { max-width: 140px; }
+  .leadership-panel-grid .leader-role-badge span { font-size: 0.56rem; padding: 2px 7px; }
+  .leadership-panel-grid .leader-name { font-size: 0.95rem; }
 }
 
 /* Leadership — non-officer members. Circular vignette treatment — initials placeholder until real
