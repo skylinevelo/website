@@ -506,6 +506,12 @@ footer.site-footer .watermark {
   font-size: 0.76rem;
   margin-bottom: 14px;
 }
+/* Roster page dropped its h1 tagline (2026-09-20) — this modifier gives the standalone
+   "Roster" eyebrow the old tagline's color/size so it doesn't look undersized on its own. */
+.eyebrow-hero {
+  color: var(--paper);
+  font-size: clamp(2.1rem, 5.4vw, 3.4rem);
+}
 
 .section { padding: 110px 24px; }
 .section .wrap-inner { max-width: var(--max-w); margin: 0 auto; }
@@ -626,10 +632,10 @@ footer.site-footer .watermark {
   .rides-preview-grid { grid-template-columns: 1fr; }
 }
 
-/* Board — the 4 founding officers, set apart from the rest of the roster in a raised panel
-   (2026-09-20, Ray's call). Everyone else (non-officer members) stays in the plain .leadership-grid
-   below, unchanged. */
-.board-panel {
+/* Leadership panel — the 4 founding officers, set apart from the rest of the roster in a raised
+   panel (2026-09-20, Ray's call). Everyone else (non-officer members) stays in the plain
+   .leadership-grid below, unchanged. */
+.leadership-panel {
   margin-top: 48px;
   max-width: var(--max-w);
   margin-left: auto;
@@ -642,18 +648,16 @@ footer.site-footer .watermark {
   gap: 32px;
   align-items: center;
 }
-.board-label {
+/* Same small-caps blue treatment as the page's .eyebrow (not the enlarged .eyebrow-hero variant). */
+.leadership-label {
   flex-shrink: 0;
-  font-family: 'Fraunces', serif;
-  font-weight: 500;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
   color: var(--accent-deep);
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.76rem;
 }
-.board-grid {
+.leadership-panel-grid {
   flex: 1;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -661,8 +665,7 @@ footer.site-footer .watermark {
   text-align: center;
 }
 @media (max-width: 640px) {
-  .board-panel { flex-direction: column; align-items: stretch; padding: 28px 20px; }
-  .board-label { writing-mode: horizontal-tb; transform: none; text-align: left; }
+  .leadership-panel { flex-direction: column; align-items: stretch; padding: 28px 20px; }
 }
 
 /* Leadership — non-officer members. Circular vignette treatment — initials placeholder until real
@@ -695,7 +698,9 @@ footer.site-footer .watermark {
   color: var(--accent-deep);
   overflow: hidden;
 }
-/* Role badge — overlaps the bottom edge of the officer's photo (board panel only). */
+/* Role badge — overlaps the bottom edge of the officer's photo (leadership panel only). Same
+   outlined-pill look the role tags used to have in .leader-tags (color/border var(--accent-deep)),
+   just with a solid bone fill behind it so it reads over a photo instead of the plain section bg. */
 .leader-role-badge {
   position: absolute;
   left: 50%;
@@ -705,21 +710,21 @@ footer.site-footer .watermark {
   flex-wrap: wrap;
   gap: 4px;
   justify-content: center;
-  width: 168px;
+  width: max-content;
+  max-width: 190px;
 }
 .leader-role-badge span {
-  font-size: 0.6rem;
+  font-size: 0.66rem;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  font-weight: 600;
-  color: var(--chalk);
-  background: var(--accent-deep);
+  letter-spacing: 0.06em;
+  color: var(--accent-deep);
+  background: var(--bone);
+  border: 1px solid var(--accent-deep);
   border-radius: 999px;
-  padding: 3px 8px;
+  padding: 3px 10px;
   white-space: nowrap;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
-.board-grid .leader-info { padding-top: 38px; }
+.leadership-panel-grid .leader-info { padding-top: 30px; }
 .leader-info { padding: 16px 8px 0; }
 .leader-name { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.12rem; }
 .leader-tags { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
@@ -732,6 +737,7 @@ footer.site-footer .watermark {
   border-radius: 999px;
   padding: 3px 10px;
 }
+.leader-tags span.role { color: var(--accent-deep); border-color: var(--accent-deep); }
 
 .member-count { margin-top: 56px; text-align: center; }
 .member-count .num { font-family: 'Fraunces', serif; font-weight: 500; font-size: clamp(2.4rem, 5.6vw, 3.6rem); color: var(--accent-deep); line-height: 1; }
