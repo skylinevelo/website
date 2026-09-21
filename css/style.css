@@ -626,11 +626,50 @@ footer.site-footer .watermark {
   .rides-preview-grid { grid-template-columns: 1fr; }
 }
 
-/* Leadership — officers only, deliberately (see decisions-log.md, minors-privacy consideration).
-   Circular vignette treatment — initials placeholder until real photos exist (website/setup.md
-   item 11); swap the .leader-photo div for a real cropped <img> then, nothing else needs to change. */
-.leadership-grid {
+/* Board — the 4 founding officers, set apart from the rest of the roster in a raised panel
+   (2026-09-20, Ray's call). Everyone else (non-officer members) stays in the plain .leadership-grid
+   below, unchanged. */
+.board-panel {
   margin-top: 48px;
+  max-width: var(--max-w);
+  margin-left: auto;
+  margin-right: auto;
+  background: var(--bone);
+  border: 1px solid var(--vellum);
+  border-radius: 18px;
+  padding: 36px 32px;
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+.board-label {
+  flex-shrink: 0;
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent-deep);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+.board-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 32px;
+  text-align: center;
+}
+@media (max-width: 640px) {
+  .board-panel { flex-direction: column; align-items: stretch; padding: 28px 20px; }
+  .board-label { writing-mode: horizontal-tb; transform: none; text-align: left; }
+}
+
+/* Leadership — non-officer members. Circular vignette treatment — initials placeholder until real
+   photos exist (website/setup.md item 11); swap the .leader-photo div for a real cropped <img>
+   then, nothing else needs to change. */
+.leadership-grid {
+  margin-top: 40px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 32px;
@@ -640,11 +679,13 @@ footer.site-footer .watermark {
   text-align: center;
 }
 .leader-card { text-align: center; }
+.leader-photo-wrap { position: relative; width: 132px; margin: 0 auto; }
 .leader-photo {
   width: 132px; height: 132px;
   margin: 0 auto;
   border-radius: 50%;
   background: var(--bone);
+  border: 1px solid var(--vellum);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -652,7 +693,33 @@ footer.site-footer .watermark {
   font-weight: 500;
   font-size: 2rem;
   color: var(--accent-deep);
+  overflow: hidden;
 }
+/* Role badge — overlaps the bottom edge of the officer's photo (board panel only). */
+.leader-role-badge {
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+  width: 168px;
+}
+.leader-role-badge span {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  color: var(--chalk);
+  background: var(--accent-deep);
+  border-radius: 999px;
+  padding: 3px 8px;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.board-grid .leader-info { padding-top: 38px; }
 .leader-info { padding: 16px 8px 0; }
 .leader-name { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.12rem; }
 .leader-tags { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
@@ -665,7 +732,6 @@ footer.site-footer .watermark {
   border-radius: 999px;
   padding: 3px 10px;
 }
-.leader-tags span.role { color: var(--accent-deep); border-color: var(--accent-deep); }
 
 .member-count { margin-top: 56px; text-align: center; }
 .member-count .num { font-family: 'Fraunces', serif; font-weight: 500; font-size: clamp(2.4rem, 5.6vw, 3.6rem); color: var(--accent-deep); line-height: 1; }
