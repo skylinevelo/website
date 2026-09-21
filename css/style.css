@@ -516,6 +516,8 @@ footer.site-footer .watermark {
   font-weight: 500;
   letter-spacing: -0.01em;
   text-transform: none;
+  line-height: 0.98;
+  margin-bottom: 0;
 }
 
 .section { padding: 110px 24px; }
@@ -641,7 +643,7 @@ footer.site-footer .watermark {
    panel (2026-09-20, Ray's call). Everyone else (non-officer members) stays in the plain
    .leadership-grid below, unchanged. */
 .leadership-panel {
-  margin-top: 12px;
+  margin-top: 0;
   max-width: var(--max-w);
   margin-left: auto;
   margin-right: auto;
@@ -662,28 +664,36 @@ footer.site-footer .watermark {
   text-transform: uppercase;
   font-size: 0.76rem;
 }
+/* Wide desktop only: exactly 4 columns, no scroll. Below 1200px there isn't reliably enough
+   room per column for a 2-pill badge (e.g. "Co-Founder"+"President") without it colliding with
+   the neighboring card's badge — a fixed-width scrolling row (below) is used instead down to
+   phone sizes, rather than letting columns compress into that collision. */
 .leadership-panel-grid {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 56px;
   text-align: center;
 }
-@media (max-width: 640px) {
+@media (max-width: 1200px) {
   .leadership-panel { flex-direction: column; align-items: stretch; padding: 28px 20px; }
-  /* Stay a horizontal row of 4, even on narrow screens — scroll sideways rather than
-     collapsing to one card per row (grid auto-fit would otherwise wrap to a single column). */
   .leadership-panel-grid {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
-    gap: 20px;
+    gap: 40px;
     padding-bottom: 6px;
     scroll-snap-type: x mandatory;
   }
   .leadership-panel-grid .leader-card {
-    flex: 0 0 128px;
+    flex: 0 0 190px;
     scroll-snap-align: start;
+  }
+}
+@media (max-width: 480px) {
+  .leadership-panel-grid { gap: 20px; }
+  .leadership-panel-grid .leader-card {
+    flex: 0 0 128px;
     padding-left: 10px;
     padding-right: 10px;
   }
